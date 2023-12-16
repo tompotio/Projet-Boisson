@@ -10,4 +10,8 @@ subscribeForm.addEventListener('submit',e=>{
     const cp = document.getElementById("cp");
     const ville = document.getElementById("ville");
     const téléphone = document.getElementById("téléphone");
+    let success = true;
+    if(mdp.value.length()<5){
+        
+    }
 })

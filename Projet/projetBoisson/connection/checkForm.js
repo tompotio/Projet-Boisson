@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const ConnectionForm = document.querySelector("#formScreen form");
     const errorLog = document.querySelector("#formScreen > p ");
     console.log("wesj");
-    ConnectionFormForm.addEventListener("submit",e=>{
+    ConnectionForm.addEventListener("submit",e=>{
         e.preventDefault();
         const login = document.getElementById("login");
         let loginValue = login.value
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded",()=>{
           };
           
           // Utilisation de l'API Fetch pour envoyer la requête avec des données
-          fetch("checkConnection.php", options)
+          fetch("./connection/checkConnection.php", options)
             .then(response => {
               // Gérer la réponse ici
               if (!response.ok) {

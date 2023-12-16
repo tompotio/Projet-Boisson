@@ -14,10 +14,12 @@
                 <div>
                  <label for="login">Login</label>
                     <input for="login"  type="text" placeholder="Login" id="login">
+                    <p id=erreurLoginCP style="color:red">votre login ne peut pas contenir de caractères spéciaux</p>
                 </div>
                 <div>
                     <label for="mdp">Mot de passe</label>
                     <input type="password"  placeholder="Mot de passe" id="mdp" >
+                    <p style="color:red">Votre mot de passe doit contenir doit au moins avoir 6 caractères</p>
                 </div>
                 <div>
                     <label for="nom">nom</label>
