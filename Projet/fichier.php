@@ -8,7 +8,7 @@ require_once 'Donnees.inc.php';
 <head>
     <meta charset="UTF-8">
     <title>Tableau Dynamique</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="arbreStyle.css">
 </head>
 
 <body>
