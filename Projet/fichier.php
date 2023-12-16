@@ -20,7 +20,7 @@ require_once 'Donnees.inc.php';
     function genererListeHTML($noeud) {
         foreach ($noeud as $nomCategorie => $categories) {
             if(isset($categories) && !empty($categories)){
-                echo '<li class="parent">' . $nomCategorie . '<span class="expand">»</span>';
+                echo '<li class="parent"><a href="#" nowrap>' . $nomCategorie . '<span class="expand">»</span></a>';
                 echo '<ul class="child">';
                 foreach ($categories as $nomEnfant => $categoriesEnfant) {
                     if(!empty($categoriesEnfant)){
