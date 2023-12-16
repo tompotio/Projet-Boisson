@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#connectionForm{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#formScreen{
+    border-radius: 10%;
+    background-color: rgb(150, 150, 150);
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    box-shadow: -1px 15px 15px 5px #423838;
+    
+}
+#formScreen div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#formScreen input{
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    
+}
