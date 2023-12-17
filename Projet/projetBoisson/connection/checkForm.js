@@ -3,7 +3,6 @@
 document.addEventListener("DOMContentLoaded",()=>{
     const ConnectionForm = document.querySelector("#formScreen form");
     const errorLog = document.querySelector("#formScreen > p ");
-    console.log("wesj");
     ConnectionForm.addEventListener("submit",e=>{
         e.preventDefault();
         const login = document.getElementById("login");
@@ -25,12 +24,12 @@ document.addEventListener("DOMContentLoaded",()=>{
               }
               return response.json(); // Ou response.text() selon le type de données que vous attendez
             })
-            .then(data => {
+               .then(data => {
               // Traiter les données renvoyées par le serveur PHP
               if(data.status=== "failed"){
                 errorLog.style='visibility:visible;color:red';
             }else{
-                window.location.replace("inscription.php"); 
+                window.location.replace("http://localhost/tree.php"); 
              }
             })
             .catch(error => {

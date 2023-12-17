@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    <div class="video-wrapper">
+<div class="video-wrapper">
         <video playsinline autoplay muted loop poster="">
         <source src="ressources/field.mp4" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+        </video>
 
     <div class="header" id="connectionForm">
         <div id="formScreen">
@@ -35,6 +35,7 @@
             </form>
             <p style ="color:red; visibility:hidden;">Nom d'utilisateur ou mot de passe incorrect</p>
         </div>
-    </div>    
+    </div>  
+</div>  
 </body>
 </html>

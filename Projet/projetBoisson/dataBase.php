@@ -13,7 +13,7 @@ try {
   
   // use exec() because no results are returned
   $conn->exec($sql);
-  echo "Database created successfully<br>";*/
+  echo "Database created successfully<br>";
   $successfull = true;
   
 } catch(PDOException $e) {
@@ -32,6 +32,7 @@ if($successfull){
         birthday DATE null,
         Street varchar(50) null,
         zipCode varchar(50) null,
+        telephone varchar(10) null,
         city varchar(50) null)";
         $creationRecipes= "CREATE OR REPLACE TABLE RECIPES(id int unsigned auto_increment primary key,
         Title varchar(50),

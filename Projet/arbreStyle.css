@@ -1,3 +1,6 @@
+body{
+	background-color: gainsboro;
+}
 .parent {
 	display: block;
 	position: relative;
@@ -17,11 +20,21 @@
 	display: block;
 	position: absolute;
 }
+.parent:hover>a>.expand{
+	transform: rotate(90deg);
+}
 
 .child {
 	display: none;
 }
+#main{
+	display:flex;
 
+}
+#main >li{
+	flex:2;
+	text-align: center;
+}
 .child li {
 	background-color: #E4EFF7;
 	line-height: 30px;
@@ -59,4 +72,7 @@ li:hover {
 	font-size: 12px;
 	float: right;
 	margin-right: 5px;
+}
+li{
+	text-align: right;
 }
