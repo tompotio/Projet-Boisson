@@ -21,14 +21,35 @@
         $arr = array();
         $categorieArr = findCat($arbre,$splitResult[count($splitResult)-1]);
         $productsList = chercherFeuilles($arr,$categorieArr,$splitResult[count($splitResult)-1]);
-        print_r(array_unique($arr));
+       
         
-        echo($_SESSION['id']);
+      
         ?>
         <?php
-            $pdo = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
-            $query = 'select distinct Title,ingredient,recipe from RECIPES r join composition c on r.id = c.recipeID join products p on p.productID = c.productID where p.product_name ='."'".$_GET['produit']."'";
-            $result = $pdo->query($query);
+             $pdo = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
+             $arr2 =array();
+             $i = 0;
+             $requete="";
+             foreach(array_unique($arr) as $nomProduit){
+                if($i==0){
+                    $requete = $requete.'product_name ='.'"'.$nomProduit.'"';
+                }
+                else{
+                    $requete = $requete.'or product_name ='.'"'.$nomProduit.'"';
+                }
+                $i++;
+            }
+             $query = 'select distinct * from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
+            echo("<div style = 'display:flex;flex-direction:column;justify-content:center;align-items:center;'>");
+             foreach($pdo->query($query) as $row){
+               generate_recipe($row);
+            }
+            echo("</div");
+             
+            
+            
+            
+             
         ?>
 
     </div>
