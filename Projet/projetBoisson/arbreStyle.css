@@ -26,6 +26,7 @@ body{
 
 .child {
 	display: none;
+	z-index: 10000;
 }
 #main{
 	display:flex;
