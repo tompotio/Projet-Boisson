@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../arbreStyle.css">
+    <link rel="stylesheet" href="../arbreStyle.css">
 </head>
 <body>
    
     <?php
-     include("../../tree.php");
+     include("../tree.php");
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -40,9 +40,12 @@
                 $i++;
             }
              $query = 'select distinct * from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
-            echo("<div style = 'display:flex;flex-direction:column;justify-content:center;align-items:center;'>");
+            echo("<div style = 'display:flex;flex-direction:column;justify-content:center;align-items:center;background-color:beige'>");
              foreach($pdo->query($query) as $row){
-               generate_recipe($row);
+                $ingredientReplace = str_replace("|"," ",$row['ingredient']);
+                echo("<div>".
+                    "<div style = 'display:flex;flex-direction:column;text-align:center;'>"."<p>"."<a href=http://localhost/projetBoisson/productPage/product.php>".
+                $row['Title']."</a></p>" .$ingredientReplace."<p>".$row['recipe']."</p>"."</div>"."</div>");
             }
             echo("</div");
              

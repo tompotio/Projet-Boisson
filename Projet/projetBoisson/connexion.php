@@ -9,6 +9,12 @@
 </head>
 
 <body>
+    <?php
+        session_start();
+        if(isset($_SESSION['id'])){
+            header("location:http://localhost/projetBoisson/tree.php");
+        }
+        ?>
 <div class="video-wrapper">
         <video playsinline autoplay muted loop poster="">
         <source src="ressources/field.mp4" type="video/mp4">
