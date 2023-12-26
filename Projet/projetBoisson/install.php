@@ -1,9 +1,9 @@
 <?php
-include("Donnees.inc.php");
+include("../Donnees.inc.php");
 $servername = "localhost";
 $username = "root";
-$password = "";
-$sql = "CREATE OR REPLACE DATABASE projetBoisson";
+$password = "root";
+$sql = "create DATABASE projetBoisson";
 $successfull;
 $conn;
 try {
@@ -18,14 +18,14 @@ try {
   
 } catch(PDOException $e) {
   echo $sql . "<br>" . $e->getMessage();
-  $successfull = true;
+  $successfull = false;
 }
 $conn=null;
 if($successfull){
     try{
-        $connection = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
+       $connection = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
       
-        $creationUser  = "CREATE OR REPLACE TABLE USER(id INT UNSIGNED AUTO_INCREMENT primary key,
+        $creationUser  = "CREATE TABLE USER(id INT UNSIGNED AUTO_INCREMENT primary key,
         login varchar(50),
         password varchar(50),
         mail varchar(50) null,
@@ -34,15 +34,15 @@ if($successfull){
         zipCode varchar(50) null,
         telephone varchar(10) null,
         city varchar(50) null)";
-        $creationRecipes= "CREATE OR REPLACE TABLE RECIPES(id int unsigned auto_increment primary key,
-        Title varchar(50),
+        $creationRecipes= "CREATE TABLE RECIPES(id int unsigned auto_increment primary key,
+        Title text,
         ingredient text,
         recipe text)";
-        $creationCart = "CREATE OR REPLACE TABLE CART(userID INT unsigned,recipesID int,primary key(userID,recipesID),FOREIGN KEY (userID) REFERENCES USER(id))";
-        $creationProducts = "CREATE OR REPLACE TABLE PRODUCTS(productID int unsigned auto_increment primary key, product_name varchar(50))";
-        $creationSubCat = "CREATE OR REPLACE TABLE SUBCAT(productID int unsigned,childID int unsigned, primary key(productID,childID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (childID) references PRODUCTS(productID))";
-        $creationSuperCat = "CREATE OR REPLACE TABLE SUPCAT(productID int unsigned,parentID int unsigned, primary key(productID,parentID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (parentID) references PRODUCTS(productID))"; 
-        $creationCompose = "CREATE OR REPLACE TABLE COMPOSITION(productID int unsigned,recipeID int unsigned, primary key(productID,recipeID),foreign key (productID) references PRODUCTS(productID),foreign key (recipeID) references RECIPES (id))";
+        $creationCart = "CREATE TABLE CART(userID INT unsigned,recipesID int,primary key(userID,recipesID),FOREIGN KEY (userID) REFERENCES USER(id))";
+        $creationProducts = "CREATE TABLE PRODUCTS(productID int unsigned auto_increment primary key, product_name varchar(50))";
+        $creationSubCat = "CREATE  TABLE SUBCAT(productID int unsigned,childID int unsigned, primary key(productID,childID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (childID) references PRODUCTS(productID))";
+        $creationSuperCat = "CREATE TABLE SUPCAT(productID int unsigned,parentID int unsigned, primary key(productID,parentID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (parentID) references PRODUCTS(productID))"; 
+        $creationCompose = "CREATE TABLE COMPOSITION(productID int unsigned,recipeID int unsigned, primary key(productID,recipeID),foreign key (productID) references PRODUCTS(productID),foreign key (recipeID) references RECIPES (id))";
         $connection->exec($creationUser);
         $connection->exec($creationRecipes);
         $connection->exec($creationCart);
@@ -115,10 +115,12 @@ if($successfull){
             $titre = $value['titre'];
             $ingredients = $value['ingredients'];
             $recipe = $value['preparation'];
-           $insertRecipeRequest ='INSERT INTO RECIPES(Title,ingredient,recipe) values (?,?,?)';
-            
+           $insertRecipeRequest ='INSERT INTO RECIPES(Title,ingredient,recipe) values (:nomProduits,:ingredients,:recette)';
            $statement = $connection->prepare($insertRecipeRequest);
-           $statement->execute([$titre,$ingredients,$recipe]);
+           $statement->bindParam(':nomProduits', $titre, PDO::PARAM_STR);
+           $statement->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
+           $statement->bindParam(':recette', $recipe, PDO::PARAM_STR);
+           $statement->execute();
             foreach($value['index'] as $keyIngredients => $ingredient){
                 $idRecipe = $keyRecettes+1;
                 $idIngredientRequest = "select productID from products where product_name=?";

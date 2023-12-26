@@ -25,11 +25,12 @@ document.addEventListener("DOMContentLoaded",()=>{
               return response.json(); // Ou response.text() selon le type de données que vous attendez
             })
                .then(data => {
-              // Traiter les données renvoyées par le serveur PHP
+                
+             // Traiter les données renvoyées par le serveur PHP
               if(data.status=== "failed"){
                 errorLog.style='visibility:visible;color:red';
             }else{
-                window.location.replace("http://localhost/tree.php"); 
+                window.location.replace("http://localhost"); 
              }
             })
             .catch(error => {

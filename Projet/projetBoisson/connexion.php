@@ -12,7 +12,7 @@
     <?php
         session_start();
         if(isset($_SESSION['id'])){
-            header("location:http://localhost/projetBoisson/tree.php");
+            header("location:http://localhost");
         }
         ?>
 <div class="video-wrapper">

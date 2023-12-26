@@ -1,0 +1,39 @@
+
+body{
+   
+    margin: 0;
+    padding: 0;
+}
+
+.gridItem:hover{
+    transform: scale(1.2);
+    
+    box-shadow: 5px 5px 15px -10px #000000 inset;
+}
+.grid{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    background-color:white;
+    flex-wrap: wrap;
+    gap:20px;
+    width: 80%;
+    margin: auto;
+}
+
+.gridItem{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+    justify-content: space-around;
+    width: 200px;
+    background-color: white;
+    padding-top: 10px;
+    height: 200px;
+    outline: 3px solid black;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: transform .5s ease-in-out;
+}

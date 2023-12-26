@@ -1,0 +1,42 @@
+.photo{
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    transition: transform .4s ease-in-out;
+   
+}
+.grid{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    background-color:white;
+    flex-wrap: wrap;
+    gap:20px;
+    width: 80%;
+    margin: auto;
+}
+
+.gridItem{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+    justify-content: center;
+    width: 200px;
+    background-color: white;
+    padding-top: 10px;
+    height: 200px;
+    outline: 3px solid black;
+    margin-top: 10px;
+    transition: transform .3s ease-in-out,box-shadow .3s ease-in-out;
+}
+.gridItem:hover{
+    transform: scale(1.2);
+    transition: transform .4s ease-in-out,box-shadow .5s ease-in-out;
+    box-shadow: 5px 5px 15px -5px #000000 inset;
+}
+.gridItem:hover .photo{
+    transform: scale(1.2);
+    transition: transform .4s ease-in-out;
+}

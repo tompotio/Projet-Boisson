@@ -1,0 +1,72 @@
+body{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    max-height: 100%;
+    overflow: hidden;
+}
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;   
+    
+}
+.productList{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.product{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 99%;
+    margin: 0 auto;
+    outline: 2px solid black;
+    background-color: white;
+    transition: transform 0.1s linear;
+}
+.product:hover{
+    transform: scale(1.005);
+}
+.photo{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 10px 0 10px 10px;
+}
+.addToCart{
+    background-color: #885df1;
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    width: 250px;
+    height: 50px;
+    margin: auto;
+    margin-right: 10px;
+}
+.addToCart:hover{
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+.productList:last-child{
+    margin-bottom: 20px;
+}
+.ToastShow{
+    position: absolute;
+    bottom: 10%;
+    right: 0;
+    animation: toast 3s linear;
+    transform: translateX(100%);
+    background-color: black;
+    color: white;
+}
+@keyframes toast {
+0%{transform: translateX(100%);}
+15%{transform: translateX(0);}
+55%{transform: translateX(0);}
+70%{transform: translateX(100%);}
+100%{transform: translateX(100%);}
+}

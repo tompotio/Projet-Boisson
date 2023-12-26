@@ -123,7 +123,7 @@ subscribeForm.addEventListener('submit',e=>{
                 responseAnswer.style.display = "block"
             }
             if(el.status === "success"){
-                document.location.href="http://localhost/projetBoisson/tree.php"; 
+                document.location.href="http://localhost"; 
             }
         });
     }

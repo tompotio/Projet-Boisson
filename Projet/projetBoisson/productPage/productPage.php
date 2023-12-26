@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="productPage.js" defer></script>
     <link rel="stylesheet" href="../arbreStyle.css">
+    <link rel="stylesheet" href="productPage.css">
+ 
 </head>
 <body>
    
@@ -12,22 +15,22 @@
      include("../tree.php");
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "root";
     ?>
      <div class="container">
-        <p><?php echo(str_replace("%20"," ",$_GET['chemin']));?></p>
+        <p style='width:fit-content;position:relative;left:50%;transform:translateX(-50%)'><?php echo(str_replace("%20"," ",$_GET['chemin']));?></p>
         <?php 
         $splitResult = preg_split("~->~",$_GET['chemin']);
         $arr = array();
         $categorieArr = findCat($arbre,$splitResult[count($splitResult)-1]);
-        $productsList = chercherFeuilles($arr,$categorieArr,$splitResult[count($splitResult)-1]);
+        chercherFeuilles($arr,$categorieArr,$splitResult[count($splitResult)-1]);
        
         
       
         ?>
         <?php
              $pdo = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
-             $arr2 =array();
+             
              $i = 0;
              $requete="";
              foreach(array_unique($arr) as $nomProduit){
@@ -39,13 +42,35 @@
                 }
                 $i++;
             }
-             $query = 'select distinct * from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
-            echo("<div style = 'display:flex;flex-direction:column;justify-content:center;align-items:center;background-color:beige'>");
-             foreach($pdo->query($query) as $row){
-                $ingredientReplace = str_replace("|"," ",$row['ingredient']);
-                echo("<div>".
-                    "<div style = 'display:flex;flex-direction:column;text-align:center;'>"."<p>"."<a href=http://localhost/projetBoisson/productPage/product.php>".
-                $row['Title']."</a></p>" .$ingredientReplace."<p>".$row['recipe']."</p>"."</div>"."</div>");
+             $query = 'select DISTINCT Title,id from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
+            echo("<div class='grid'>");
+            $goodLink = "../../Photos/unknown.jpg"; 
+            $script = "this.src='$goodLink'";
+            foreach($pdo->query($query) as $row){
+               
+                $nameFileArray= preg_split("/ /",$row['Title']);
+                $i = 0;
+                $nameFile ="";
+                foreach($nameFileArray as $word){
+                   
+                    if($i!=0){
+                        $nameFile .="_".strtolower($word);
+                    }
+                    else{
+                        $nameFile .=$word;
+                        
+                    }
+                  
+                    $i++;
+                }
+               
+                $path = "../../Photos/$nameFile.jpg";
+                echo(
+                    "<div class='gridItem'>".
+                    "<img style='width:50px;height:50px;object-fit:cover;' class ='photo' src ='$path' onError=$script>".
+                    "<p >".
+                    "<a  href=http://localhost/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
+                     $row['Title']."</a></p> "."</div>");
             }
             echo("</div");
              
