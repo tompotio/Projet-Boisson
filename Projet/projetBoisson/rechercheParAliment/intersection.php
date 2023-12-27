@@ -7,8 +7,8 @@ $requete = "select Title,product_name,r.id from composition c JOIN recipes r on 
 $stmt = $connection->query($requete);
 $resultArr = $stmt->fetchAll();
 $result = array();
+$success = true;
 $sortResult =[];
-$count = [];
 foreach($resultArr as $composition){
     if(!isset($sortResult[$composition['Title']])){
         $sortResult[$composition['Title']]=[];
@@ -17,57 +17,35 @@ foreach($resultArr as $composition){
 }
 
 foreach($sortResult as $key => $composition){
-    
+    $success = true;
     foreach($data['desiré'] as $wish){
-       
         $arr = array();
         $categorieArr = findCat($arbre,$wish);
         chercherFeuilles($arr,$categorieArr,$wish);
-        $orSuccess = false;
+        !$orSuccess = false;
         foreach($arr as $leaf){
-            
+           
             if(in_array($leaf,array_column($composition,'product_name'))){
                 $orSuccess = true;
             }
         }
-        if($orSuccess){
-            if(!isset($count[$key])){
-                $count[$key]=[];
-                $count[$key]['count']=0;
-                $count[$key]['id']=$composition[0]['id'];
-            }
-            $count[$key]['count']++;
+        if(!$orSuccess){
+            $success = false;
         }
     }
     foreach($data['indesiré'] as $unWish){
         $arr = array();
         $categorieArr = findCat($arbre,$unWish);
         chercherFeuilles($arr,$categorieArr,$unWish);
-        $orSuccess = true;
         foreach($arr as $leaf){
             if(in_array($leaf,array_column($composition,'product_name'))){
-                $orSuccess = false;   
+                $success = false;
             }
         }
-        if($orSuccess){
-              
-            if(!isset($count[$key])){
-        
-                $count[$key]=[];
-                $count[$key]['count']=0;
-                $count[$key]['id']=$composition[0]['id'];
-            }
-            $count[$key]['count']++;
-        }
-    }   
-}
-
-$columns = array_column($count, 'count');
-array_multisort($columns, SORT_DESC, $count);
-$result =[];
-
-foreach($count as $key=>$recipe){
-    $nameFileArray= preg_split("/ /",$key);
+    }
+    
+    if($success){
+        $nameFileArray= preg_split("/ /",$key);
             $i = 0;
             $nameFile ="";
             foreach($nameFileArray as $word){   
@@ -80,13 +58,15 @@ foreach($count as $key=>$recipe){
                     $i++;
                 }
                
-                $path = "../../Photos/$nameFile.jpg";
-    $result[] = ['recipe'=>$key,'id'=>$recipe['id'],'path'=>$path];
+        $path = "../../Photos/$nameFile.jpg";
+        array_push($result,['recipe'=>$key,'id'=>$composition[0]['id'],'path'=>$path]);
+    }   
+      
 }
-echo(json_encode($result,JSON_UNESCAPED_UNICODE));
-
-
-
-
-
+echo(json_encode($result,JSON_UNESCAPED_UNICODE));  
 ?>
+
+
+
+
+

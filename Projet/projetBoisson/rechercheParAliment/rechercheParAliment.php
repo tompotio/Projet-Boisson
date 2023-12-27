@@ -14,7 +14,7 @@
     ?>
     <div class='page'>
         <div class="container">
-            <h1 style='margin:0 auto;  '>configuration</h1>
+            <h1 style='text-align:center;  '>configuration</h1>
             <div class='searchContainer'>  
             <h3 style='margin:auto;'>aliment souhaité</h3>
             <div class='inputSearch'>
@@ -39,7 +39,9 @@
             </div>
             <button class='addToCart' >rechercher</button>
         </div>
-        <div class="recipeContainer"></div>
+        <div class="recipeContainer">
+            <div class="grid"></div>
+        </div>
     </div>
 </body>
 </html>

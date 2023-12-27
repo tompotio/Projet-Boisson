@@ -72,7 +72,7 @@ hr {
         bottom: 10%;
         right: 0;
         animation: toast 3s linear;
-        transform: translateX(100%);
+        
         background-color: black;
         color: white;
 }

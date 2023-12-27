@@ -4,7 +4,7 @@ const createGridItem = (recipe)=>{
     const gridDiv = document.createElement("div");
     gridDiv.classList.add("gridItem")
     gridDiv.innerHTML=`<img style='width:50px;height:50px;object-fit:cover;' class ='photo' src=${recipe[2]} onError="this.src='Photos/unknown.jpg'">
-    <p><a href=htt://localhost/projetBoisson/productPage/recipe.php?recipe="${recipe[1]}">
+    <p><a href=http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}>
     ${recipe[0]} </a></p></div>`
     gridContainer.appendChild(gridDiv);
 }

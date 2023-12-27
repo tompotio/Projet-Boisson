@@ -45,29 +45,49 @@ inputsParents.forEach((el)=>{
 
 const searchButton = document.querySelector(".addToCart");
 
-
+const showRecipe =(data)=>{
+    const grid = document.querySelector(".grid");
+    grid.innerHTML='';
+    data.forEach((recipe)=>{
+        const divProduct = document.createElement("div");
+        divProduct.classList.add("gridItem");
+        divProduct.innerHTML=`<img style='width:100px;height:100px;object-fit:cover;' class ='photo' src=${recipe.path} onError="this.src='../../Photos/unknown.jpg'">
+        <p><a href=http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe.id}>${recipe.recipe}</a></p></div>`
+        grid.appendChild(divProduct);
+    })
+}
 searchButton.addEventListener("click",(e)=>{
     const check = document.querySelector('input[name="mode"]:checked').value;
-    const desire =document.querySelectorAll(".desiré")
+    const desire =document.querySelectorAll(".desiré .choice")
     let desireArray=new Array();
+    let i =0;
     desire.forEach((desireProduct)=>{
-        desireArray=[...desireArray,desireProduct.innerText]
+        desireArray[i]=desireProduct.innerText;
+        i++
     })
-    const indesiré = document.querySelectorAll(".indesiré");
+    const indesiré = document.querySelectorAll(".indesiré>.choice");
     let indesiréArray=new Array();
+    i=0
     indesiré.forEach((indesiréProduct)=>{
-        indesiréArray=[...indesiréArray,indesiréProduct.innerText]
+        indesiréArray[i]=indesiréProduct.innerText;
+        i++
     })
-   if(check==='Intersection'){
-        
-   }
-   else{
-    fetch("./union.php",{
-        method:'post',
-        body:JSON.stringify({
-            desiré:desireArray[0],
-            indesiré:indesiréArray[0]
-        })
-    }).then(res=>res.text()).then(data=>console.log(data))
-   }
-})
+    
+    if(check==='Intersection'){
+        fetch("./intersection.php",{
+            method:'post',
+            body:JSON.stringify({
+                desiré:desireArray,
+                indesiré:indesiréArray
+            })
+        }).then(res=>res.json()).then(data=>showRecipe(data));
+       }
+       else{
+        fetch("./union.php",{
+            method:'post',
+            body:JSON.stringify({
+                desiré:desireArray,
+                indesiré:indesiréArray
+            })
+        }).then(res=>res.json()).then(data=>showRecipe(data))
+}})

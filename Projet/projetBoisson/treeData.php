@@ -53,15 +53,11 @@ function findCat($arbre,$categories){
         
 }
 function chercherFeuilles(&$arr, $categories,$nomCategorie) {
+    array_push($arr,$nomCategorie);
     if (!empty($categories)) {
         foreach ($categories as $nom=>$sousCategories) {
             chercherFeuilles($arr, $sousCategories,$nom);
         }
-    } else {
-        // $categories est une feuille, ajoutons-la à $arr
-        
-        array_push($arr,$nomCategorie);
-        
     }
 }
 // ---------------------------------------------------------------------------- [Code] ----------------------------------------------------------------------------  \\
