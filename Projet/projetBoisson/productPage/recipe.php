@@ -12,8 +12,8 @@
     try{
        
         include("../tree.php");
-        
-        $connection = new PDO("mysql:host=localhost;dbname=projetBoisson", "root");
+        include("../../Identifiiant/identifiantSQL.inc.php");
+        $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
         $query = 'select Title,ingredient,recipe from RECIPES where id='.$_GET['recipe'] ;
         
         $data = $connection->query($query);

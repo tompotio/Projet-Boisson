@@ -1,8 +1,9 @@
 <?php
+include("../../Identifiiant/identifiantSQL.inc.php");
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 
-$connection = new PDO("mysql:host=localhost;dbname=projetBoisson", "root");
+$connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
 session_start();
 if(!isset($_SESSION['id'])){
     

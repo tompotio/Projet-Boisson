@@ -1,4 +1,5 @@
 const inputsParents = document.querySelectorAll(".inputSearch");
+
 const createElement=(el,product,delay)=>{
     const divContainter = el.querySelector(":scope >div ");
     const input = el.querySelector("input");
@@ -91,3 +92,6 @@ searchButton.addEventListener("click",(e)=>{
             })
         }).then(res=>res.json()).then(data=>showRecipe(data))
 }})
+
+const search = document.querySelector(".search");
+search.style.display='none'

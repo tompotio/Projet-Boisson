@@ -3,6 +3,7 @@ $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 
 include("../treeData.php");
+include("../../Identifiiant/identifiantSQL.inc.php");
 $arr = array();
 $categorieArr = findCat($arbre,$data['id']);
 chercherFeuilles($arr,$categorieArr,$data['id']);
@@ -19,7 +20,7 @@ foreach(array_unique($arr) as $nomProduit){
    $i++;
 }
 $query = 'select distinct Title,id from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
-$pdo = new PDO("mysql:host=localhost;dbname=projetBoisson", "root");
+$pdo = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
 foreach($pdo->query($query) as $row){
     if(str_starts_with(strtolower($row['Title']),$data['search'])){
         $nameFileArray= preg_split("/ /",$row['Title']);

@@ -7,7 +7,6 @@ body{
 
 .gridItem:hover{
     transform: scale(1.2);
-    
     box-shadow: 5px 5px 15px -10px #000000 inset;
 }
 .grid{

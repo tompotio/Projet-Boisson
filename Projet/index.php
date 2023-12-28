@@ -10,14 +10,14 @@
 </head>
 <body>
     <?php
+        require_once("./Identifiiant/identifiantSQL.inc.php");
         include_once("./projetBoisson/tree.php"); 
-        $servername = "localhost";
-    $username = "root";
-    $password = "";
+    
     ?>
      <div class="container">
         <?php
-             $pdo = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
+            
+             $pdo = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
              $arr2 =array();
              $i = 0;
              $requete="";

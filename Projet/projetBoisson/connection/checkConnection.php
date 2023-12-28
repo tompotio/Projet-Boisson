@@ -1,9 +1,10 @@
 <?php
+include("../../Identifiiant/identifiantSQL.inc.php");
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
  try{
     session_start();
-    $connection = new PDO("mysql:host=localhost;dbname=projetBoisson", "root");
+    $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
     $query = "select id from USER where login = ? and password = ?";
     $statement = $connection->prepare($query);
     $statement->execute([$data['login'],$data['password']]);

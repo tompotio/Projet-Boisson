@@ -12,10 +12,8 @@
 <body>
    
     <?php
-     include("../tree.php");
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
+    include("../../Identifiiant/identifiantSQL.inc.php");
+    include("../tree.php");
     ?>
      <div class="container">
         <p style='width:fit-content;position:relative;left:50%;transform:translateX(-50%)'><?php echo(str_replace("%20"," ",$_GET['chemin']));?></p>
@@ -29,7 +27,7 @@
       
         ?>
         <?php
-             $pdo = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
+             $pdo = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
              
              $i = 0;
              $requete="";

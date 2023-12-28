@@ -1,6 +1,10 @@
+html{
+    height: 100%;
+}
 body{
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 .search{
     display: none;
@@ -8,15 +12,15 @@ body{
 .container {
     position: relative;
     width: fit-content;
-    /* height: 100%; */
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 50px;
     flex: 1;
+    margin: 0;
+    padding: 0;
     outline: 2px solid black;
-    padding: 10px;
 }
 .addToCart{
     background-color: #885df1;
@@ -25,6 +29,7 @@ body{
     width: 250px;
     height: 50px;
     margin: auto;
+    font-weight:bold;
 }
 .addToCart:hover{
     color: rgba(255, 255, 255, 1);
@@ -47,15 +52,18 @@ body{
     gap: 10px;
     margin: 20px;
 }
-.page{
+.page {
     height: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
 }
-.recipeContainer{
-	width: 100%;
+.recipeContainer {
+    width: 100%;
     background-color: aliceblue;
+    max-height: 91vh;
+    overflow-y: auto;
+    padding: 0;
 }
 .mode{
 	outline: 2px solid black;
@@ -97,16 +105,18 @@ body{
     50%{opacity: 0.5;}
     100%{opacity: 1;}
 }
-.grid{
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-    background-color:white;
+.grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
     flex-wrap: wrap;
-    gap:20px;
-    width: 100%;
-    margin: auto;
+    gap: 20px;
+    padding-top: 10px;
+    overflow: auto;
+    height: 100%;
+    padding: 0;
 }
 
 .gridItem{
@@ -123,4 +133,25 @@ body{
     margin-top: 10px;
     margin-bottom: 20px;
     transition: transform .5s ease-in-out;
+}
+.gridItem:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px -10px #000000 inset;
+}
+
+@media (max-width: 770px){
+    body{
+        height: fit-content;
+       
+    }
+    .page{
+        flex-direction: column;
+    }
+    .container{
+        width: auto;
+        align-items: center;
+    }
+    html{
+        width: auto;
+    }
 }

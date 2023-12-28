@@ -2,7 +2,8 @@
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 include("../treeData.php");
-$connection = new pdo("mysql:host=localhost;dbname=projetBoisson","root");
+inclue("../../Identifiiant/identifiantSQL.inc.php");
+$connection = new pdo("mysql:host=$servername;dbname=$dataBase",$username,$password);
 $requete = "select Title,product_name,r.id from composition c JOIN recipes r on c.recipeID = r.id JOIN products p on p.productID = c.productID";
 $stmt = $connection->query($requete);
 $resultArr = $stmt->fetchAll();

@@ -1,31 +1,11 @@
 <?php
 include("../Donnees.inc.php");
-$servername = "localhost";
-$username = "root";
-$password = "root";
+include("../Identifiiant/identifiantSQL.inc.php");
 $sql = "create DATABASE projetBoisson";
 $successfull;
-$conn;
-try {
-  $conn = new PDO("mysql:host=$servername", $username);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
-  // use exec() because no results are returned
-  $conn->exec($sql);
-  echo "Database created successfully<br>";
-  $successfull = true;
-  
-} catch(PDOException $e) {
-  echo $sql . "<br>" . $e->getMessage();
-  $successfull = false;
-}
-$conn=null;
-if($successfull){
-    try{
-       $connection = new PDO("mysql:host=$servername;dbname=projetBoisson", $username);
-      
-        $creationUser  = "CREATE TABLE USER(id INT UNSIGNED AUTO_INCREMENT primary key,
+try{
+       $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username);
+       $creationUser  = "CREATE TABLE USER(id INT UNSIGNED AUTO_INCREMENT primary key,
         login varchar(50),
         password varchar(50),
         mail varchar(50) null,
@@ -140,6 +120,6 @@ if($successfull){
         }
 
     }
-    }
+    
 
 ?>

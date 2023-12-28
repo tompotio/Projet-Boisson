@@ -15,8 +15,8 @@
         <h1>Vos Favoris</h1>
         <div class='productList'>
             <?php
-                 
-                $connection = new PDO("mysql:host=localhost;dbname=projetBoisson", "root"); 
+                include("../../Identifiiant/identifiantSQL.inc.php");
+                $connection = new PDO("mysql:host=$servername;dbname=$dataBase",$username,$password); 
                 if(!isset($_SESSION['id'])){
                     if(!isset($_SESSION['panier'])){
                         $_SESSION['panier']=[];

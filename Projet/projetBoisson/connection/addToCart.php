@@ -1,6 +1,8 @@
 <?php
+include("../../Identifiiant/identifiantSQL.inc.php");
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
+
 $recipeID = $data['id'];
 session_start();
 try{
@@ -19,7 +21,7 @@ try{
         }
     }
     else{
-        $pdo = new PDO("mysql:host=localhost;dbname=projetBoisson", "root");
+        $pdo = new PDO("mysql:host=$servername;dbname=$dataBase",$username,$password);
         $query = "select recipesID from cart where userID =? and recipesID=?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$_SESSION['id'],$recipeID]);
