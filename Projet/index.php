@@ -45,7 +45,7 @@
                  }
                 
                  $path = "../../Photos/$nameFile.jpg";
-                 echo( "<a style='text-decoration:none;color:black' href=http://localhost/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
+                 echo( "<a style='text-decoration:none;color:black' href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
                      "<div class='gridItem'>".
                      "<img class ='photo' src ='$path' onError=$script>".
                      "<p style='z-index:10000'>".

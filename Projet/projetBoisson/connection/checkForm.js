@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded",()=>{
           };
           
           // Utilisation de l'API Fetch pour envoyer la requête avec des données
-          fetch("./connection/checkConnection.php", options)
+          fetch("./checkConnection.php", options)
             .then(response => {
               // Gérer la réponse ici
               if (!response.ok) {
