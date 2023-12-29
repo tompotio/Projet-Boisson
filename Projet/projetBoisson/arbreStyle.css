@@ -131,3 +131,7 @@ li{
 .mainNavBar>li>#nomCategorie{
 	width: 100%;
 }
+
+#search:hover{
+	box-shadow: none;
+}

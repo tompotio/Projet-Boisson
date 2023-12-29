@@ -104,9 +104,9 @@ if(isset($_SESSION['id'])){
     <li><div id='nomCategorie'><a style='color:black;width:100%' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/deconnection.php'>déconnectez vous</a></div></li>");
 }
 else{
-    echo("<li ><div id='nomCategorie'><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/connexion.php'> connectez vous</a></div></li>");
+    echo("<li><div id='nomCategorie'><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/connexion.php'> connectez vous</a></div></li>");
 }
-echo("<li class='search' style='  display: flex; justify-content: center; margin:0 auto;'><input style='width:100%;margin:0 auto' type='text'></li>");
+echo("<img src='http://".$_SERVER['SERVER_NAME']."/Photos/loupe.png' alt='' style=' width:1%; height:30%;'> <li class='search' id='search' style='  display: flex; justify-content: center; margin:0 auto;'><input style='width:100%;margin:0 auto' type='text'></li>");
 echo("<li><a href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/rechercheParAliment/rechercheParAliment.php style='color:black'>recherche par groupe d'aliment</a></li>");
 echo("<li ><div id='nomCategorie'><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/favoris/favoris.php'>vos favoris</a></div></li>");
 
