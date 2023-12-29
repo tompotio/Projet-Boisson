@@ -83,7 +83,7 @@
                 </div>
              <div class='input'>
              <input class='input' style='font-size:0.8em'id="inscription" type="submit" value="s'inscrire">
-            <p style='color:white'>vous avez déjà un compte ? <a  style='color:white' href="http://localhost/projetBoisson/connexion.php">Connectez-vous</a></p>
+            <p style='color:white'>vous avez déjà un compte ? <a  style='color:white' href="http://localhost/projetBoisson/connection/connexion.php">Connectez-vous</a></p>
              </div>
             </form>
             <p id='responseAnswer' style ="color:red; display:none;">Nom d'utilisateur ou mot de passe incorrect</p>

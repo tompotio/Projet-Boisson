@@ -25,11 +25,22 @@ erreurTelephone.style.color='red';
 erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
 erreurTelephone.style.visibility="hidden";
 téléphone.after(erreurTelephone);
-
 const erreurMail= document.createElement("p");
+erreurMail.style.color='red';
+erreurMail.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
+erreurMail.style.visibility="hidden";
+mail.after(erreurTelephone);
 const erreurAdresse = document.createElement("p");
+erreurTelephone.style.color='red';
+erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
+erreurTelephone.style.visibility="hidden";
+téléphone.after(erreurTelephone);
 const erreurVille = document.createElement("p");
-const codePostal = document.createElement("p");
+erreurTelephone.style.color='red';
+erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
+erreurTelephone.style.visibility="hidden";
+téléphone.after(erreurTelephone);
+const erreurCodePostal = document.createElement("p");
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     success = true;
