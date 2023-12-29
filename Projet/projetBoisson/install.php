@@ -1,5 +1,5 @@
 <?php
-include("../Donnees.inc.php");
+include("./Donnees.inc.php");
 include("../Identifiiant/identifiantSQL.inc.php");
 $sql = "create DATABASE projetBoisson";
 $successfull;
