@@ -1,6 +1,8 @@
 const button = document.querySelector(".addToCart")
 const search = document.querySelector(".search");
 search.style.display='none'
+const loupe = document.querySelector(".loupe"); 
+loupe.style.display='none'
 let canClick = true;
 button.addEventListener("click",()=>{
     
