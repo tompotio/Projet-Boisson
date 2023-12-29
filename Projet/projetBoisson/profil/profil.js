@@ -1,15 +1,13 @@
-const mdp = document.querySelector("input[name='mot de passe']");
+
 const prenom = document.querySelector("input[name='prenom']");
-console.log(prenom)
 const nom = document.querySelector("input[name='nom']");
 const téléphone = document.querySelector("input[name='telephone']");
-const dateDeNaissance = document.querySelector("input[name='date de naissance']");
 const mail = document.querySelector("input[name='mail']");
 const adresse = document.querySelector("input[name='adresse']");
 const codePostal = document.querySelector("input[name='codePostal']");
 const ville = document.querySelector("input[name='ville']");
-const form =document.querySelector(".formProfil");
-const erreurMDP = document.createElement("p");
+const form =document.querySelector("form");
+
 const erreurPrenom = document.createElement("p");
 erreurPrenom.style.color='red'
 erreurPrenom.innerText="Le prénom peut contenir uniquement des lettres"
@@ -27,20 +25,24 @@ erreurTelephone.style.visibility="hidden";
 téléphone.after(erreurTelephone);
 const erreurMail= document.createElement("p");
 erreurMail.style.color='red';
-erreurMail.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
+erreurMail.innerText="votre mail n'est pas au bon format"
 erreurMail.style.visibility="hidden";
-mail.after(erreurTelephone);
+mail.after(erreurMail);
 const erreurAdresse = document.createElement("p");
 erreurAdresse.style.color='red';
-erreurAdresse.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
+erreurAdresse.innerText="Le format n'est pas bon votre adresse doit commencer par au moins suivi d'une virgule"
 erreurAdresse.style.visibility="hidden";
-adresse.after(erreurTelephone);
+adresse.after(erreurAdresse);
 const erreurVille = document.createElement("p");
-erreurTelephone.style.color='red';
-erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
-erreurTelephone.style.visibility="hidden";
-téléphone.after(erreurTelephone);
+erreurVille.style.color='red';
+erreurVille.innerText="Le nom de votre n'est pas correcte"
+erreurVille.style.visibility="hidden";
+ville.after(erreurVille);
 const erreurCodePostal = document.createElement("p");
+erreurCodePostal.style.color='red';
+erreurCodePostal.innerText="Le code postal est invalide"
+erreurCodePostal.style.visibility="hidden";
+codePostal.after(erreurCodePostal);
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     success = true;
@@ -59,13 +61,42 @@ form.addEventListener("submit",(e)=>{
     else{
         erreurNom.style.visibility="hidden";
     }
-    if(téléphone.value.length!==0 && !/(0|\\+33|0033)[1-9][0-9]{8}/.test(téléphone.value)){
-        erreurTelephone.style.visibility="visible";
+    var emailReg = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/i);
+    if(!emailReg.test(mail.value)&& mail.value.length>0){
+        erreurMail.style.visibility="visible";
         success = false;
     }
     else{
-        erreurTelephone.style.visibility="hidden";
+        erreurMail.style.visibility="hidden";
+    }
+    if(!/^[0-9]+[,][a-z\sA-Z]+$/.test(adresse.value) && adresse.value.length> 0){
+        erreurAdresse.style.visibility='visible'
+        success = false;
+    }
+    else{
+        erreurAdresse.style.visibility="hidden"
     }
     
+    if(!(/^[0-9]{5}$/.test(codePostal.value)) && codePostal.value.length>0){
+        erreurCodePostal.style.visibility='visible'
+        success = false;
+    }else{
+        erreurCodePostal.style.visibility="hidden"
+    }
+    if(!(/^[a-zA-Z][-]?[a-zA-Z]+/).test(ville.value)&& ville.value.length>0){
+        erreurVille.style.visibility='visible'
+        success = false;
+    }
+    else{
+        erreurVille.style.visibility='hidden';
+    }
+    if(!/(0|\\+33|0033)[1-9][0-9]{8}/.test(téléphone.value) && téléphone.value.length>0){
+        erreurTelephone.style.visibility='visible'
+        success = false;
+    }
+    else{
+        erreurTelephone.style.visibility='hidden';
+    }
+
 })
 

@@ -22,12 +22,9 @@
         echo("<h1 class='Titre'>Bienvenue ".$data['login']."</h1>");
         ?>
         
-        <form class='formProfil'>
-            <div class='inputProfil'>
-            <label for="mot de passe">Changer votre mot de passe</label>
-            <input type=text name='mot de passe'>
-            </div>
-            
+        <form>
+       
+           <div class='formProfil'>
             <div class='inputProfil'>
             <label for="prenom">Prenom</label>
             <input type="text" name="prenom" value=<?php echo($data['prenom'])?>>
@@ -40,7 +37,6 @@
             <label for="telephone">Tel</label>
             <input type="tel" name="telephone" value=<?php echo($data['telephone'])?>>
             </div>
-       
             <div class='inputProfil'>
             <label for="mail">Mail</label>
             <input type="mail" name=mail value=<?php echo($data['mail'])?>>
@@ -58,6 +54,8 @@
             <input type="text" name="ville" value=<?php echo($data['city'])?>>
             </div>
             <input type="submit">
+            </div>
+            
         </form>
     </div>
 </body>
