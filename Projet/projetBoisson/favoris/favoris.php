@@ -15,7 +15,7 @@
         <h1>Vos Favoris</h1>
         <div class='productList'>
             <?php
-                include("../../Identifiiant/identifiantSQL.inc.php");
+                include("../../Identifiant/identifiantSQL.inc.php");
                 $connection = new PDO("mysql:host=$servername;dbname=$dataBase",$username,$password); 
                 if(!isset($_SESSION['id'])){
                     if(!isset($_SESSION['panier'])){

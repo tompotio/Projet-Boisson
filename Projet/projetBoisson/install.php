@@ -1,6 +1,6 @@
 <?php
-include("../Donnees.inc.php");
-include("../Identifiiant/identifiantSQL.inc.php");
+include("./Donnees.inc.php");
+require_once("../Identifiant/identifiantSQL.inc.php");
 $sql = "create DATABASE projetBoisson";
 $successfull;
 try{
@@ -8,7 +8,10 @@ try{
        $creationUser  = "CREATE TABLE USER(id INT UNSIGNED AUTO_INCREMENT primary key,
         login varchar(50),
         password varchar(50),
+        nom varchar(50) null,
+        prenom varchar(50) null,
         mail varchar(50) null,
+        sexe varchar(50) null,
         birthday DATE null,
         Street varchar(50) null,
         zipCode varchar(50) null,

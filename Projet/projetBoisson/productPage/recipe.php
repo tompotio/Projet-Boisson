@@ -12,7 +12,7 @@
     try{
        
         include("../tree.php");
-        include("../../Identifiiant/identifiantSQL.inc.php");
+        include("../../Identifiant/identifiantSQL.inc.php");
         $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
         $query = 'select Title,ingredient,recipe from RECIPES where id='.$_GET['recipe'] ;
         

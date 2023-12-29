@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php
-        require_once("./Identifiiant/identifiantSQL.inc.php");
+        require_once("./Identifiant/identifiantSQL.inc.php");
         include_once("./projetBoisson/tree.php"); 
     
     ?>

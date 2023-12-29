@@ -1,0 +1,28 @@
+.formProfil{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        width: fit-content;
+        gap: 30px;
+        transform: translateX(-25%);
+        padding: 10px;
+}
+.container{
+    background-color: white;
+    padding-bottom: 10px;
+}
+.inputProfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Titre{
+   
+        text-align: center;
+        margin: 0 auto;
+        width: fit-content;
+        transform: translateX(-25%);
+    
+}

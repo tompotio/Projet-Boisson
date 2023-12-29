@@ -2,7 +2,7 @@
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 include("../treeData.php");
-inclue("../../Identifiiant/identifiantSQL.inc.php");
+inclue("../../Identifiant/identifiantSQL.inc.php");
 $connection = new pdo("mysql:host=$servername;dbname=$dataBase",$username,$password);
 $requete = "select Title,product_name,r.id from composition c JOIN recipes r on c.recipeID = r.id JOIN products p on p.productID = c.productID";
 $stmt = $connection->query($requete);

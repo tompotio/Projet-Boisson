@@ -1,5 +1,5 @@
 <?php
-include("../../Identifiiant/identifiantSQL.inc.php");
+include("../../Identifiant/identifiantSQL.inc.php");
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 
@@ -13,13 +13,13 @@ if(!isset($_SESSION['id'])){
     $arrayIDcopy = new ArrayObject($_SESSION['panier']);
     $arrayID = $arrayIDcopy->getArrayCopy();
 }else{
-    $request = "select recipesID from cart c on where userID" . $_SESSION['id'];
-    $stmt = $connection->query();
+    $request = "select recipesID from cart c where userID = '" . $_SESSION['id']."'";
+    $stmt = $connection->query($request);
     $arrayID = $stmt->fetchAll();
 }
     $array = [];
     foreach($arrayID as $recipeID){
-        $request  = "select Title,id from recipes where id=" . $recipeID;
+        $request  = "select Title,id from recipes where id =" . $recipeID['recipesID'];
         $stmt = $connection->query($request);
         $dataRecipe = $stmt->fetch();
         if(str_starts_with(strtolower($dataRecipe['Title']),strtolower($data['search']))){

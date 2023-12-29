@@ -71,11 +71,11 @@ subscribeForm.addEventListener('submit',e=>{
         erreurLoginCP.style.display='block';
         success = false;
     }
-    if(!nom.value.match("/[a-zA-ZÀ-ú]*/") &&!nom.value.length===0){
+    if(!/^[a-zA-ZÀ-ú]+$/.test(nom.value) &&nom.value.length!==0){
         erreurNom.style.display="block";
         success = false;
     }
-    if(!prenom.value.match("/[A-zÀ-ú]*/") &&!prenom.value.length===0){
+    if(!/^[a-zA-ZÀ-ú]+$/.test(prenom.value) &&prenom.value.length!==0){
         erreurprenom.style.display="block";
         success = false;
     }
@@ -102,7 +102,9 @@ subscribeForm.addEventListener('submit',e=>{
         erreurTelephone.style.display = "block";
         success = false;
     }
-    console.log(birthday.value);
+    const sexe = document.querySelector("input[type=radio]:checked");
+   const value = sexe===null?"":sexe.value;
+    console.log(value);
     if(success){
         const options = {
             method: 'POST', // Utilisation de la méthode POST
@@ -110,6 +112,7 @@ subscribeForm.addEventListener('submit',e=>{
                 password:mdp.value,
                 nom:nom.value,
                 prenom:prenom.value,
+                sexe:value,
                 mail:mail.value,
                 adresse:adresse.value,
                 cp:cp.value,

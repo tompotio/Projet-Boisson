@@ -1,8 +1,8 @@
 <?php
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
-include("./Identifiiant/identifiantSQL.inc.php");
-$connection = new PDO("mysql:host=$sername;dbname=$dataBase", $username,$password);
+require_once("./Identifiant/identifiantSQL.inc.php");
+$connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
 session_start();
 $request = "select distinct Title,id from recipes where Title like '".strtolower($data['search'])."%'";
 $stmt=$connection->query($request);
