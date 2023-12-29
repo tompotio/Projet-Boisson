@@ -104,3 +104,18 @@ button a {
     width: 150px;
     text-align: center;
 }
+.sexe{
+   
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.inputSexeContainer{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 100%;
+    align-items: normal;
+
+}

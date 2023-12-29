@@ -3,7 +3,8 @@
     $data = json_decode($input_data, true);
     session_start();
     try{
-        $connection = new PDO("mysql:host=localhost;dbname=projetBoisson", "root");
+        require_once("../../Identifiant/identifiantSQL.inc.php");
+        $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
         $verif ="select count(*) from USER where login=?";
         $statement = $connection->prepare($verif);
         $statement->execute([$data['login']]);
@@ -17,9 +18,9 @@
             else{
                 $formatedDate = null;
             }
-            $query ="insert into user(login,password,mail,birthday,street,zipCode,telephone,city) values(?,?,?,?,?,?,?,?)";
+            $query ="insert into user(login,password,nom,prenom,mail,sexe,birthday,street,zipCode,telephone,city) values(?,?,?,?,?,?,?,?,?,?,?)";
             $statement = $connection->prepare($query);
-            $statement->execute([$data['login'],$data['password'],$data['mail'],$formatedDate,$data['adresse'],$data['cp'],$data['téléphone'],$data['ville'],]);
+            $statement->execute([$data['login'],$data['password'],$data['nom'],$data['prenom'],$data['mail'],$data['sexe'],$formatedDate,$data['adresse'],$data['cp'],$data['téléphone'],$data['ville'],]);
             $userID = $statement->fetch(PDO::FETCH_ASSOC);
             $verif ="select id from USER where login=?";
             $statement = $connection->prepare($verif);

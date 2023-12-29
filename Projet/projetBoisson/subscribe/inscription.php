@@ -33,12 +33,24 @@
                     <input id="nom" type="text" placeholder=nom>
                     <p id="erreurNom"style="color:red;display:none">votre nom ne doit pas contenir autre chose que des lettres</p>
                 </div>
-                <div class='input'>
+                <div class='input '>
                     <label for="prénom">prénom</label>
                     <input id="prénom"type="text" placeholder = prénom>
                     <p id="erreurprenom"style="color:red;display:none">votre nom ne doit pas contenir autre chose que des lettres</p>
                 </div>
-                
+                <div class='input sexe'>
+                    <label for="prénom">Sexe</label>
+                    <div class='inputSexeContainer'>
+                        <div>
+                            <label for="sexe">M</label>
+                            <input type="radio" name="sexe" value="M">
+                        </div>
+                        <div>
+                            <label for="sexe">F</label>
+                            <input type="radio" name="sexe" value="F">
+                        </div>
+                    </div>
+                </div>
                 <div class='input'>
                     <label for="mail">email</label>
                     <input id="mail" type="text" placeholder=email>

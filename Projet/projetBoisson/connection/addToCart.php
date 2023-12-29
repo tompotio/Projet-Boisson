@@ -1,5 +1,5 @@
 <?php
-include("../../Identifiiant/identifiantSQL.inc.php");
+include("../../Identifiant/identifiantSQL.inc.php");
 $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 

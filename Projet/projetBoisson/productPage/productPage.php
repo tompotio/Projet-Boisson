@@ -12,7 +12,7 @@
 <body>
    
     <?php
-    include("../../Identifiiant/identifiantSQL.inc.php");
+    include("../../Identifiant/identifiantSQL.inc.php");
     include("../tree.php");
     ?>
      <div class="container">
