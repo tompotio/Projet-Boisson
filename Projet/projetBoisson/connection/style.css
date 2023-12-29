@@ -29,7 +29,7 @@ video {
 }
 
 .input{
-    height: 60px;
+    height: 50px;
 }
 
 .video-wrapper{
@@ -123,5 +123,10 @@ button a {
     justify-content: space-evenly;
     height: 100%;
     align-items: normal;
-
+}
+.input>input{
+    font-size: 0.8em;
+}
+.input>p{
+    font-size: 0.8em;
 }

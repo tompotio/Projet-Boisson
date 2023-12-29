@@ -31,10 +31,10 @@ erreurMail.innerText="Le format n'est pas bon le numero ne peut contenir que des
 erreurMail.style.visibility="hidden";
 mail.after(erreurTelephone);
 const erreurAdresse = document.createElement("p");
-erreurTelephone.style.color='red';
-erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
-erreurTelephone.style.visibility="hidden";
-téléphone.after(erreurTelephone);
+erreurAdresse.style.color='red';
+erreurAdresse.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
+erreurAdresse.style.visibility="hidden";
+adresse.after(erreurTelephone);
 const erreurVille = document.createElement("p");
 erreurTelephone.style.color='red';
 erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
@@ -66,5 +66,6 @@ form.addEventListener("submit",(e)=>{
     else{
         erreurTelephone.style.visibility="hidden";
     }
+    
 })
 
