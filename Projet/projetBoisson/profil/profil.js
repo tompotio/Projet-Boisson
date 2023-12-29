@@ -35,7 +35,7 @@ erreurAdresse.style.visibility="hidden";
 adresse.after(erreurAdresse);
 const erreurVille = document.createElement("p");
 erreurVille.style.color='red';
-erreurVille.innerText="Le nom de votre n'est pas correcte"
+erreurVille.innerText="Le nom de votre ville n'est pas correcte"
 erreurVille.style.visibility="hidden";
 ville.after(erreurVille);
 const erreurCodePostal = document.createElement("p");
@@ -46,7 +46,7 @@ codePostal.after(erreurCodePostal);
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     success = true;
-    console.log(prenom.value)
+    
     if(prenom.value.length!==0 && !/^[a-zA-ZÀ-ú]+$/.test(prenom.value)){
         erreurPrenom.style.visibility="visible";
         success = false;
@@ -83,7 +83,7 @@ form.addEventListener("submit",(e)=>{
     }else{
         erreurCodePostal.style.visibility="hidden"
     }
-    if(!(/^[a-zA-Z][-]?[a-zA-Z]+/).test(ville.value)&& ville.value.length>0){
+    if(!(/^[a-zA-Z][-]?[a-zA-Z]+$/).test(ville.value)&& ville.value.length>0){
         erreurVille.style.visibility='visible'
         success = false;
     }
@@ -97,6 +97,31 @@ form.addEventListener("submit",(e)=>{
     else{
         erreurTelephone.style.visibility='hidden';
     }
-
+    if(success){
+        const options = {
+            method: 'POST', // Utilisation de la méthode POST
+            body: JSON.stringify(
+                {
+                nom:nom.value,
+                prenom:prenom.value,
+                mail:mail.value,
+                adresse:adresse.value,
+                codepostal:codePostal.value,
+                ville:ville.value,
+                téléphone:téléphone.value
+                }
+            ) // Convertir les données en JSON
+        };
+        fetch("updateSubscribe.php",options).then((res)=>res.text()).then(el=>{
+            console.log(el);
+            if(el.status === 'failed'){
+                responseAnswer.innerText = el.message;
+                responseAnswer.style.display = "block"
+            }
+            if(el.status === "success"){
+                document.location.href="http://localhost"; 
+            }
+        });
+    }
 })
 

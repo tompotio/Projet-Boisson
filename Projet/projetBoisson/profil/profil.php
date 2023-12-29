@@ -10,7 +10,16 @@
 </head>
 <body>
     <?php
-    include("../tree.php");
+    
+    session_start();
+    if(!isset($_SESSION['id'])){
+        header("location:http://".$_SERVER['SERVER_NAME']);
+    }else{
+        session_abort();
+        include("../tree.php");
+    }
+    
+    
     ?>
     <div class="container">
         <?php
