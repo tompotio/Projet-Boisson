@@ -1,6 +1,6 @@
 <?php
-include("./Donnees.inc.php");
-require_once("../Identifiant/identifiantSQL.inc.php");
+include("../Donnees.inc.php");
+include("../Identifiiant/identifiantSQL.inc.php");
 $sql = "create DATABASE projetBoisson";
 $successfull;
 try{

@@ -61,23 +61,17 @@
                   
                     $i++;
                 }
+
                
                 $path = "../../Photos/$nameFile.jpg";
                 echo(
+                    "<a style='text-decoration: none; color:red;' href=http://localhost/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
                     "<div class='gridItem'>".
-                    "<img style='width:50px;height:50px;object-fit:cover;' class ='photo' src ='$path' onError=$script>".
-                    "<p >".
-                    "<a  href=http://localhost/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
-                     $row['Title']."</a></p> "."</div>");
+                    "<img style='width:100px;height:100px;object-fit:cover;' class ='photo' src ='$path' onError=$script>".
+                    "<p >".$row['Title']."</p> "."</div></a>");
             }
             echo("</div");
-             
-            
-            
-            
-             
         ?>
-
     </div>
    
 </body>
