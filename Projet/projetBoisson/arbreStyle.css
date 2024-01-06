@@ -139,3 +139,11 @@ li{
 #search:hover{
 	box-shadow: none;
 }
+#main a{
+	background: none;
+}
+#main #nomCategorie a{
+	background: none;
+	background-color: transparent;
+	color: white;
+}

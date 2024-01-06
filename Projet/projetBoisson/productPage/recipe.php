@@ -20,7 +20,7 @@
         $nameFileArray= preg_split("/ /",$data['Title']);
         $i = 0;
         $nameFile ="";
-        $goodLink = "../../Photos/unknown.jpg"; 
+        $goodLink = "../../Photos/unknown.png"; 
        
         foreach($nameFileArray as $word){
            
@@ -36,7 +36,7 @@
         }
         $path = "../../Photos/$nameFile.jpg";
         if(!file_exists($path)){
-            $path = "../../Photos/unknown.jpg";
+            $path = "../../Photos/unknown.png";
         }
         $ingredientReplace = str_replace("|"," ",$data['ingredient']);
        
