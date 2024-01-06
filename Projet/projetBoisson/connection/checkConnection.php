@@ -4,27 +4,28 @@ $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
  try{
     session_start();
-    $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
+    $connection = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
     $query = "select id from USER where login = ? and password = ?";
     $statement = $connection->prepare($query);
     $statement->execute([$data['login'],$data['password']]);
     $userID = $statement->fetch(PDO::FETCH_ASSOC);
     if(empty($userID)||!isset($userID)){
         $response = array("status"=> 'failed');
+        $connection=null;
         echo json_encode($response);
     }
     else{   
             //on enregistre les elements de la session dans la bdd
             foreach($_SESSION['panier'] as $recipe){
-                $checkQuery = "select recipesID from cart where userID=".$userID['id']. " and recipesID=".$recipe;
+                $checkQuery = "select recipesID from CART where userID=".$userID['id']. " and recipesID=".$recipe;
                 $data = $connection->query($checkQuery);
                 if(!$data->fetch()){
-                    $insertQuery = 'insert into cart(userID,recipesID) values('.$userID["id"].",".$recipe.")";
+                    $insertQuery = 'insert into CART(userID,recipesID) values('.$userID["id"].",".$recipe.")";
                     $connection->exec($insertQuery);
                 }  
             }
             $_SESSION['panier']=[];
-            $request = "select recipesID from cart where userID=".$userID['id'];
+            $request = "select recipesID from CART where userID=".$userID['id'];
             $stmt = $connection->query($request);
             $array = $stmt->fetchAll();
             foreach($array as $recipe){
@@ -32,9 +33,9 @@ $data = json_decode($input_data, true);
             }
             $_SESSION['id']=$userID['id'];
             $response = array("status"=> 'success');
+            $connection=null;
             echo json_encode($response);
     }
-    
 }
 catch(PDOException $error){
     echo($error->getMessage());

@@ -1,10 +1,13 @@
 <?php
-include("../Donnees.inc.php");
-include("../Identifiiant/identifiantSQL.inc.php");
+include("./Donnees.inc.php");
+include("../Identifiant/identifiantSQL.inc.php");
 $sql = "create DATABASE projetBoisson";
 $successfull;
 try{
-       $connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username);
+       $connection = new PDO("mysql:host=$servername,$username,$password");
+       $connection->exec($sql);
+       $connection=null;
+       $connection = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
        $creationUser  = "CREATE TABLE USER(id INT UNSIGNED AUTO_INCREMENT primary key,
         login varchar(50),
         password varchar(50),
@@ -16,16 +19,16 @@ try{
         Street varchar(50) null,
         zipCode varchar(50) null,
         telephone varchar(10) null,
-        city varchar(50) null)";
+        city varchar(50) null) character set utf8";
         $creationRecipes= "CREATE TABLE RECIPES(id int unsigned auto_increment primary key,
         Title text,
         ingredient text,
-        recipe text)";
-        $creationCart = "CREATE TABLE CART(userID INT unsigned,recipesID int,primary key(userID,recipesID),FOREIGN KEY (userID) REFERENCES USER(id))";
-        $creationProducts = "CREATE TABLE PRODUCTS(productID int unsigned auto_increment primary key, product_name varchar(50))";
-        $creationSubCat = "CREATE  TABLE SUBCAT(productID int unsigned,childID int unsigned, primary key(productID,childID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (childID) references PRODUCTS(productID))";
-        $creationSuperCat = "CREATE TABLE SUPCAT(productID int unsigned,parentID int unsigned, primary key(productID,parentID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (parentID) references PRODUCTS(productID))"; 
-        $creationCompose = "CREATE TABLE COMPOSITION(productID int unsigned,recipeID int unsigned, primary key(productID,recipeID),foreign key (productID) references PRODUCTS(productID),foreign key (recipeID) references RECIPES (id))";
+        recipe text) character set utf8";
+        $creationCart = "CREATE TABLE CART(userID INT unsigned,recipesID int,primary key(userID,recipesID),FOREIGN KEY (userID) REFERENCES USER(id)) character set utf8";
+        $creationProducts = "CREATE TABLE PRODUCTS(productID int unsigned auto_increment primary key, product_name varchar(50)) character set utf8";
+        $creationSubCat = "CREATE  TABLE SUBCAT(productID int unsigned,childID int unsigned, primary key(productID,childID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (childID) references PRODUCTS(productID)) character set utf8";
+        $creationSuperCat = "CREATE TABLE SUPCAT(productID int unsigned,parentID int unsigned, primary key(productID,parentID),foreign key (productID) REFERENCES PRODUCTS(productID),foreign key (parentID) references PRODUCTS(productID))character set utf8"; 
+        $creationCompose = "CREATE TABLE COMPOSITION(productID int unsigned,recipeID int unsigned, primary key(productID,recipeID),foreign key (productID) references PRODUCTS(productID),foreign key (recipeID) references RECIPES (id))character set utf8";
         $connection->exec($creationUser);
         $connection->exec($creationRecipes);
         $connection->exec($creationCart);
@@ -35,12 +38,8 @@ try{
         $connection->exec($creationCompose);
         echo "table created successfully<br>";
         $successfull = true;
-    }
+    
 
-    catch(PDOException $error){
-        echo($error->getMessage());
-        $successfull = false;
-    }
     if($successfull){
         $list = '';
         $numItem = 0;
@@ -49,10 +48,10 @@ try{
         foreach( $Hierarchie as $key => $product){
             $numItem=$numItem+1;
             if($numItem==$length){
-                $list = $list.'("'.$key.'")';
+                $list = $list.'("N'.$key.'")';
             }
             else{
-                $list = $list.'("'.$key.'")'.',';
+                $list = $list.'("N'.$key.'")'.',';
             }  
         }
         $insertRequest = "insert INTO PRODUCTS(product_name) values" . $list;
@@ -72,7 +71,7 @@ try{
                 $statement->execute();
                 $childID = $statement->fetch(PDO::FETCH_ASSOC);
                 $childID = $childID['productID'];
-                $insertCatRequest = "INSERT INTO SUBCAT(productID,childID) values ($productID,$childID)";
+                $insertCatRequest = "INSERT INTO SUBCAT(productID,childID) values (N ($productID),N ($childID))";
                 $connection->exec($insertCatRequest);
                 }
             }
@@ -84,7 +83,7 @@ try{
                     $statement->execute();
                     $parentID = $statement->fetch(PDO::FETCH_ASSOC);
                     $parentID = $parentID['productID'];
-                    $insertCatRequest = "INSERT INTO SUPCAT(productID,parentID) values ($productID,$parentID)";
+                    $insertCatRequest = "INSERT INTO SUPCAT(productID,parentID) values ( N ($productID),N ($parentID))";
                     $connection->exec($insertCatRequest);
                 }
             }
@@ -98,15 +97,16 @@ try{
             $titre = $value['titre'];
             $ingredients = $value['ingredients'];
             $recipe = $value['preparation'];
-           $insertRecipeRequest ='INSERT INTO RECIPES(Title,ingredient,recipe) values (:nomProduits,:ingredients,:recette)';
+           $insertRecipeRequest ='INSERT INTO RECIPES(Title,ingredient,recipe) values ( N (:nomProduits), N (:ingredients), N :recette)';
            $statement = $connection->prepare($insertRecipeRequest);
            $statement->bindParam(':nomProduits', $titre, PDO::PARAM_STR);
            $statement->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
            $statement->bindParam(':recette', $recipe, PDO::PARAM_STR);
            $statement->execute();
+           echo("ajout".$keyRecettes."reussi");
             foreach($value['index'] as $keyIngredients => $ingredient){
                 $idRecipe = $keyRecettes+1;
-                $idIngredientRequest = "select productID from products where product_name=?";
+                $idIngredientRequest = "select productID from PRODUCTS where product_name=?";
                 $statement = $connection->prepare($idIngredientRequest);
                 $statement->execute([$ingredient]);
                 $idIngredient = $statement->fetch();
@@ -115,7 +115,7 @@ try{
                 $statement->execute([$idIngredient["productID"],$idRecipe]);
                 $checkResult = $statement->fetch();
                 if($checkResult['count(productID)']==0){
-                    $insertComposeRequest = 'insert into COMPOSITION(productID,recipeID) values ('.$idIngredient["productID"].",".$idRecipe.")";
+                    $insertComposeRequest = 'insert into COMPOSITION(productID,recipeID) values ( N '.$idIngredient["productID"].", N ".$idRecipe.")";
                     $connection->exec($insertComposeRequest);
                 }
                 
@@ -123,6 +123,12 @@ try{
         }
 
     }
-    
+    $connection=null;
+}
+
+catch(PDOException $error){
+    echo($error->getMessage());
+    $successfull = false;
+} 
 
 ?>

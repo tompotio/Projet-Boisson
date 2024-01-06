@@ -37,5 +37,4 @@ button.addEventListener("click",()=>{
             canClick=false;
         });
     }
-
 });

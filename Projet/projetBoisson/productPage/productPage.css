@@ -20,7 +20,12 @@ body{
     width: 80%;
     margin: auto;
 }
-
+.photo{
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    transition: transform .4s ease-in-out;
+}
 .gridItem{
     display:flex;
     flex-direction:column;
@@ -32,7 +37,12 @@ body{
     padding-top: 10px;
     height: 200px;
     outline: 3px solid black;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
     transition: transform .5s ease-in-out;
+    
+}
+.gridItem:hover .photo{
+    transform: scale(1.2);
+    transition: transform .4s ease-in-out;
 }

@@ -3,8 +3,8 @@ $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 include("../treeData.php");
 require_once("../../Identifiant/identifiantSQL.inc.php");
-$connection = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
-$requete = "select Title,product_name,r.id from composition c JOIN recipes r on c.recipeID = r.id JOIN products p on p.productID = c.productID";
+$connection = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
+$requete = "select Title,product_name,r.id from COMPOSITION c JOIN RECIPES r on c.recipeID = r.id JOIN PRODUCTS p on p.productID = c.productID";
 $stmt = $connection->query($requete);
 $resultArr = $stmt->fetchAll();
 $result = array();
@@ -16,7 +16,6 @@ foreach($resultArr as $composition){
     }
     array_push($sortResult[$composition['Title']],['product_name'=>$composition['product_name'],'id'=>$composition['id']]);
 }
-
 foreach($sortResult as $key => $composition){
     
     foreach($data['desiré'] as $wish){
@@ -51,9 +50,7 @@ foreach($sortResult as $key => $composition){
             }
         }
         if($orSuccess){
-              
             if(!isset($count[$key])){
-        
                 $count[$key]=[];
                 $count[$key]['count']=0;
                 $count[$key]['id']=$composition[0]['id'];
@@ -62,7 +59,6 @@ foreach($sortResult as $key => $composition){
         }
     }   
 }
-
 $columns = array_column($count, 'count');
 array_multisort($columns, SORT_DESC, $count);
 $result =[];
@@ -82,8 +78,12 @@ foreach($count as $key=>$recipe){
                 }
                
                 $path = "../../Photos/$nameFile.jpg";
+                if(!file_exists($path)){
+                    $path = "../../Photos/unknown.png";
+                }
     $result[] = ['recipe'=>$key,'id'=>$recipe['id'],'path'=>$path];
 }
+$connection=null;
 echo(json_encode($result,JSON_UNESCAPED_UNICODE));
 
 

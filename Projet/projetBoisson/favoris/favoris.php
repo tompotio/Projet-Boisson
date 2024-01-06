@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profil</title>
     <link rel="stylesheet" href="../arbreStyle.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,17 +15,18 @@
         <h1>Vos Favoris</h1>
         <div class='productList'>
             <?php
+            try{
                 include("../../Identifiant/identifiantSQL.inc.php");
-                $connection = new PDO("mysql:host=$servername;dbname=$dataBase",$username,$password); 
+                $connection = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4",$username,$password); 
                 if(!isset($_SESSION['id'])){
                     if(!isset($_SESSION['panier'])){
                         $_SESSION['panier']=[];
                     }
-                    foreach($_SESSION['panier'] as $recipe){
-                        $requestQuery = "select Title from recipes where id=$recipe";
+                    foreach($_SESSION['panier'] as $recipe){   
+                        $requestQuery = "select Title from RECIPES where id=$recipe";
                         $res = $connection->query($requestQuery);
                         $title = $res->fetch();
-                        $goodLink = "../../Photos/unknown.jpg" ;
+                        $goodLink = "../../Photos/unknown.png" ;
                         $script = "this.src='$goodLink'";
                         $nameFileArray= preg_split("/ /",$title['Title']);
                         $i = 0;
@@ -41,11 +42,13 @@
                             }
                            
                             $path = "../../Photos/$nameFile.jpg";
-                           
+                            if(!file_exists($path)){
+                                $path = "../../Photos/unknown.png";
+                            }
                             echo("<div class='product'> 
-                                    <img class='photo' src=".$path." onError=".$script.
+                                    <img class='photo' src=".$path.
                                     ">
-                                    <h1><a style='text-decoration:none' href='http://localhost/projetBoisson/productPage/recipe.php?recipe=".$recipe."'>".$title['Title']."</a></h1>
+                                    <h1><a style='text-decoration:none;color:black;font-weight:bold;' href='http://localhost/projetBoisson/productPage/recipe.php?recipe=".$recipe."'>".$title['Title']."</a></h1>
                                     <div>
                                         <button data-id =".$recipe." class='addToCart'>retirer des favoris</button>
                                     </div>
@@ -54,11 +57,11 @@
                     }
                 }
                 else{
-                    $selectQuery = "select Title,id from recipes r join cart c on r.id=c.recipesID where c.userID=".$_SESSION['id'];
+                    $selectQuery = "select Title,id from RECIPES r join CART c on r.id=c.recipesID where c.userID=".$_SESSION['id'];
                     $recipesStatement = $connection->query($selectQuery);
                     $recipes = $recipesStatement->fetchAll();
                     foreach($recipes as $recipe){
-                        $goodLink = "../../Photos/Black_velvet.jpg" ;
+                        $goodLink = "../../Photos/unknown.png" ;
                         $script = "this.src='$goodLink'";
                         $nameFileArray= preg_split("/ /",$recipe['Title']);
                         $i = 0;
@@ -74,17 +77,25 @@
                             }
                            
                             $path = "../../Photos/$nameFile.jpg";
-                           
+                              if(!file_exists($path)){
+                                $path = "../../Photos/unknown.png";
+                              }
                             echo("<div class='product'> 
-                                    <img class='photo' src=".$path." onError=".$script.
+                                    <img class='photo' src=".$path.
                                     ">
-                                    <h2 ><a style='color:black; font-weight:bold;' href='http://localhost/projetBoisson/productPage/recipe.php?recipe=".$recipe['id']."'>".$recipe['Title']."</a></h2>
+                                    <h2 ><a style='color:black;text-decoration:none; font-weight:bold;' href='http://localhost/projetBoisson/productPage/recipe.php?recipe=".$recipe['id']."'>".$recipe['Title']."</a></h2>
                                     <div>
                                         <button data-id=".$recipe['id']." class='addToCart'>retirer des favoris</button>
                                     </div>
                                 </div>");
                     }
                 }
+                $connection=null;
+            }
+           
+            catch(PDOException $error){
+                echo($error->getMessage());
+            }
             ?>
         </div>
     </div>

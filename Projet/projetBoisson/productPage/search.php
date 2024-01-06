@@ -19,8 +19,8 @@ foreach(array_unique($arr) as $nomProduit){
    }
    $i++;
 }
-$query = 'select distinct Title,id from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
-$pdo = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
+$query = 'select distinct Title,id from RECIPES r join COMPOSITION c on r.id=c.recipeID join PRODUCTS p on p.productID=c.productID where '.$requete;
+$pdo = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
 foreach($pdo->query($query) as $row){
     if(str_starts_with(strtolower($row['Title']),$data['search'])){
         $nameFileArray= preg_split("/ /",$row['Title']);
@@ -38,9 +38,14 @@ foreach($pdo->query($query) as $row){
         
             $i++;
         }
+       
         $path = "../../Photos/$nameFile.jpg";
+        if(!file_exists($path)){
+            $path = "../../Photos/unknown.png";
+        }
         array_push($arr2,[$row['Title'],$row['id'],$path]);
     }
 }
+$pdo=null;
 echo json_encode($arr2,JSON_UNESCAPED_UNICODE);
 ?>

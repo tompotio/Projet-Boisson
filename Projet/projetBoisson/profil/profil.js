@@ -1,4 +1,8 @@
+const search = document.querySelector(".search")
+search.style.display='none';
 
+const loupe= document.querySelector(".loupe");
+loupe.style.display='none';
 const prenom = document.querySelector("input[name='prenom']");
 const nom = document.querySelector("input[name='nom']");
 const téléphone = document.querySelector("input[name='telephone']");
@@ -113,14 +117,7 @@ form.addEventListener("submit",(e)=>{
             ) // Convertir les données en JSON
         };
         fetch("updateSubscribe.php",options).then((res)=>res.text()).then(el=>{
-            console.log(el);
-            if(el.status === 'failed'){
-                responseAnswer.innerText = el.message;
-                responseAnswer.style.display = "block"
-            }
-            if(el.status === "success"){
-                document.location.href="http://localhost"; 
-            }
+            document.location.href="http://localhost"; 
         });
     }
 })

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Categorie</title>
     <script src="productPage.js" defer></script>
     <link rel="stylesheet" href="../arbreStyle.css">
     <link rel="stylesheet" href="productPage.css">
@@ -12,22 +12,36 @@
 <body>
    
     <?php
+
+
     include("../../Identifiant/identifiantSQL.inc.php");
     include("../tree.php");
     ?>
      <div class="container">
-        <p style='width:fit-content;position:relative;left:50%;transform:translateX(-50%)'><?php echo(str_replace("%20"," ",$_GET['chemin']));?></p>
+        
         <?php 
         $splitResult = preg_split("~->~",$_GET['chemin']);
+        $chemin = "";
+        $cheminAvecLien="";
+        $i=0;
+        foreach($splitResult as $word){
+                if($i==0){
+                    $chemin=$chemin.$word;
+                    $cheminAvecLien.="<a style='text-decoration:none;color:black' href='http://localhost/projetBoisson/productPage/productPage.php?produit=".$word."&"."chemin=".$chemin."'>".$word."</a>";
+                }
+                else{
+                    $chemin=$chemin."->".$word;
+                    $cheminAvecLien.="<a style='text-decoration:none;color:black' href='http://localhost/projetBoisson/productPage/productPage.php?produit=".$word."&"."chemin=".$chemin."'>"."->".$word."</a>";
+                }
+                $i++;
+        }
         $arr = array();
         $categorieArr = findCat($arbre,$splitResult[count($splitResult)-1]);
-        chercherFeuilles($arr,$categorieArr,$splitResult[count($splitResult)-1]);
-       
-        
-      
+        chercherFeuilles($arr,$categorieArr,$splitResult[count($splitResult)-1]);      
         ?>
+        <p style='width:fit-content;position:relative;left:50%;transform:translateX(-50%)'><?php echo($cheminAvecLien);?></p>
         <?php
-             $pdo = new PDO("mysql:host=$servername;dbname=$dataBase", $username,$password);
+             $pdo = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
              
              $i = 0;
              $requete="";
@@ -40,9 +54,9 @@
                 }
                 $i++;
             }
-             $query = 'select DISTINCT Title,id from RECIPES r join composition c on r.id=c.recipeID join products p on p.productID=c.productID where '.$requete;
+             $query = 'select DISTINCT Title,id from RECIPES r join COMPOSITION c on r.id=c.recipeID join PRODUCTS p on p.productID=c.productID where '.$requete;
             echo("<div class='grid'>");
-            $goodLink = "../../Photos/unknown.jpg"; 
+            $goodLink = "../../Photos/unknown.png"; 
             $script = "this.src='$goodLink'";
             foreach($pdo->query($query) as $row){
                
@@ -64,13 +78,17 @@
 
                
                 $path = "../../Photos/$nameFile.jpg";
+                if(!file_exists($path)){
+                    $path = "../../Photos/unknown.png";
+                }
                 echo(
-                    "<a style='text-decoration: none; color:red;' href=http://localhost/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
+                    "<a style='text-decoration: none; color:black;' href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
                     "<div class='gridItem'>".
-                    "<img style='width:100px;height:100px;object-fit:cover;' class ='photo' src ='$path' onError=$script>".
+                    "<img style='width:100px;height:100px;object-fit:cover;' class ='photo' src ='$path'".
                     "<p >".$row['Title']."</p> "."</div></a>");
             }
             echo("</div");
+            $pdo=null;
         ?>
     </div>
    

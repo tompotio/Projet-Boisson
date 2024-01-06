@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>inscription</title>
     <link rel="stylesheet" href="../connection/style.css">
     <script src="subscribe.js"defer></script>
 </head>
 <body>
 <div class="video-wrapper">
-        <video playsinline autoplay muted loop poster="">
-        <source src="../ressources/field.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-        </video>
+<a style='color:black;' href=http://localhost ><img style='width:320px;object-fit:cover;position:absolute;top:0;left:10px' src='http://localhost/projetBoisson/ressources/logo.png'/></a>
 
     <div id="connectionForm">
         <div id="formScreen">

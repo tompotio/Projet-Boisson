@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../arbreStyle.css">
-    <title>Document</title>
+    <title>Profil</title>
     <link rel="stylesheet" href="profil.css">
     <script defer src="profil.js"></script>
 </head>
@@ -24,11 +24,12 @@
     <div class="container">
         <?php
         include("../../Identifiant/identifiantSQL.inc.php");
-        $connection = new PDO("mysql:host=$servername;dbname=$dataBase",$username,$password); 
-        $request = "select * from user where id =". $_SESSION['id'];
+        $connection = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4",$username,$password); 
+        $request = "select * from USER where id =". $_SESSION['id'];
         $stmt = $connection->query($request);
         $data = $stmt->fetch();
         echo("<h1 class='Titre'>Bienvenue ".$data['login']."</h1>");
+        $connection=null;
         ?>
         
         <form>
@@ -62,7 +63,7 @@
             <label for="ville">Ville</label>
             <input type="text" name="ville" value=<?php echo($data['city'])?>>
             </div>
-            <input type="submit">
+            <input type="submit" value="enregistrer les modification">
             </div>
             
         </form>

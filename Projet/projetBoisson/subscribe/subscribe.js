@@ -93,7 +93,7 @@ subscribeForm.addEventListener('submit',e=>{
         erreurCodePostal.style.display="block";
         success = false;
     }
-    if(!(/^[a-zA-Z]+[-]?[a-zA-Z]+$/).test(ville.value)&& ville.value.length>0){
+    if(!(/^[a-zA-Z\u0080-\u024F\s\/\-\)\(\`\.\"\']+$/).test(ville.value)&& ville.value.length>0){
         erreurVille.style.display = "block";
         success = false;
     }

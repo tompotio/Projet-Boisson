@@ -21,25 +21,26 @@ try{
         }
     }
     else{
-        $pdo = new PDO("mysql:host=$servername;dbname=$dataBase",$username,$password);
-        $query = "select recipesID from cart where userID =? and recipesID=?";
+        $pdo = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4",$username,$password);
+        $query = "select recipesID from CART where userID =? and recipesID=?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$_SESSION['id'],$recipeID]);
         if(!$stmt->fetch()){
-            $insertQuery = "insert into cart(userID,recipesID) values(?,?)";
+            $insertQuery = "insert into CART(userID,recipesID) values(?,?)";
             $stmt = $pdo->prepare($insertQuery);
             $stmt->execute([$_SESSION['id'],$recipeID]);
             $response = array("status"=> 'add');
             echo(json_encode($response));
         }
         else{
-            $insertQuery = "delete from cart where userID =? and recipesID=?";
+            $insertQuery = "delete from CART where userID =? and recipesID=?";
             $stmt = $pdo->prepare($insertQuery);
             $stmt->execute([$_SESSION['id'],$recipeID]);
             $response = array("status"=> 'delete');
             echo(json_encode($response));
         }   
     }
+    $pdo=null;
 }
 catch(PDOException $error){
     echo ($error->getMessage());

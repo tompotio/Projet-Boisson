@@ -3,6 +3,7 @@
     width: 100px;
     object-fit: cover;
     transition: transform .4s ease-in-out;
+    margin-bottom: 20px;
    
 }
 .grid{
@@ -15,6 +16,7 @@
     gap:20px;
     width: 80%;
     margin: auto;
+    padding-bottom: 20px;
 }
 
 .gridItem{
@@ -28,9 +30,13 @@
     padding-top: 10px;
     height: 200px;
     outline: 3px solid black;
-    margin-top: 10px;
+    margin-top: 20px;
     transition: transform .3s ease-in-out,box-shadow .3s ease-in-out;
+    
+    
+    
 }
+
 .gridItem:hover{
     transform: scale(1.2);
     transition: transform .4s ease-in-out,box-shadow .5s ease-in-out;

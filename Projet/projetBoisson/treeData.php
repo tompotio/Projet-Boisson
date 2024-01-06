@@ -53,16 +53,16 @@ function findCat($arbre,$categories){
         
 }
 function chercherFeuilles(&$arr, $categories,$nomCategorie) {
-    if (!empty($categories)) {
+    
+    array_push($arr,$nomCategorie);
         foreach ($categories as $nom=>$sousCategories) {
             chercherFeuilles($arr, $sousCategories,$nom);
         }
-    } else {
+    
         // $categories est une feuille, ajoutons-la à $arr
         
-        array_push($arr,$nomCategorie);
-        
-    }
+       
+  
 }
 // ---------------------------------------------------------------------------- [Code] ----------------------------------------------------------------------------  \\
 
@@ -77,7 +77,7 @@ foreach ($Hierarchie as $aliment => $categories) {
     if(!empty($categories)){
         if(isset($categories['super-categorie'])){
             foreach ($categories['super-categorie'] as $index => $nom) {
-                if(strcasecmp($nom, 'Aliment') == 0){
+                if(!isset($Hierarchie[$nom]['super-categorie'])){
                     // On instancie un nouveau tableau au niveau de l'élément.
                     ajouterSousCategories(
                         $arbre['Aliment'], 
@@ -96,19 +96,20 @@ foreach ($Hierarchie as $aliment => $categories) {
 <?php
 function generateNav($arbre){
 echo('<nav style="background-color:white;display:flex;flex-direction:column;width:100%;">
-<ul class="mainNavBar"style=display:flex;justify-content:center;gap:10px;height:50px;align-items:center;paddin:10px>');
+<ul class="mainNavBar"style=display:flex;justify-content:center;gap:10px;height:80px;align-items:center;>');
 session_start();
-echo("<li><a style='color:black;' href=http://".$_SERVER['SERVER_NAME'].">Accueil</a>");
+
+echo("<li><a style='color:black;' href=http://".$_SERVER['SERVER_NAME']."><img style='width:190px;object-fit:cover' src='http://localhost/projetBoisson/ressources/logo.png'/></a></li>");
 if(isset($_SESSION['id'])){
-    echo("<li ><div id='nomCategorie'><a style='color:black;width:100%' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/profil/profil.php'>profil</a></div></li>
-    <li><div id='nomCategorie'><a style='color:black;width:100%' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/deconnection.php'>déconnectez vous</a></div></li>");
+    echo("<li ><a style='color:black;width:100%' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/profil/profil.php'>profil</a></li>
+    <li><a style='color:black;width:100%' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/deconnection.php'>déconnectez vous</a></li>");
 }
 else{
-    echo("<li><div id='nomCategorie'><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/connexion.php'> connectez vous</a></div></li>");
+    echo("<li><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/connexion.php'> connectez vous</a></li>");
 }
 echo("<img src='http://".$_SERVER['SERVER_NAME']."/Photos/loupe.png' class='loupe' alt='' style=' width:1%; height:30%;'> <li class='search' id='search' style='  display: flex; justify-content: center; margin:0 auto;'><input style='width:100%;margin:0 auto' type='text'></li>");
 echo("<li><a href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/rechercheParAliment/rechercheParAliment.php style='color:black'>recherche par groupe d'aliment</a></li>");
-echo("<li ><div id='nomCategorie'><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/favoris/favoris.php'>vos favoris</a></div></li>");
+echo("<li ><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/favoris/favoris.php'>vos favoris</a></li>");
 
 echo("</ul>");
 echo('<ul id="main" style="width:100%">');
