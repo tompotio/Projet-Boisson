@@ -94,7 +94,7 @@ form.addEventListener("submit",(e)=>{
     }else{
         erreurCodePostal.style.visibility="hidden"
     }
-    if(!(/^[a-zA-Z][-]?[a-zA-Z]+$/).test(ville.value)&& ville.value.length>0){
+    if(!(/^[a-zA-Z\u0080-\u024F\s\/\-\)\(\`\.\"\']+$/).test(ville.value)&& ville.value.length>0){
         erreurVille.style.visibility='visible'
         success = false;
     }
