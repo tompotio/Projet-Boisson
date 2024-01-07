@@ -3,11 +3,11 @@ const gridContainer =document.querySelector(".grid");
 const createGridItem = (recipe)=>{
     const grida = document.createElement("a");
     grida.href=`http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}`
+    grida.style.textDecoration='none';
     grida.innerHTML=`
     <div class='gridItem'>
     <img class ='photo' src ='${recipe[2]}'>
-    <p style='z-index:10000;text-decoration:none;color:black;'>
-     ${recipe[0]}</p>`
+    <p style='z-index:10000;color:black;' >${recipe[0]} </p>`
     gridContainer.appendChild(grida);
 }
 

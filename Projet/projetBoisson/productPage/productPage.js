@@ -3,6 +3,7 @@ const grid =document.querySelector(".grid");
 const createElement = (recipe)=>{
     const grida = document.createElement("a");
     grida.href=`http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}`
+    grida.style.textDecoration='none';
     grida.innerHTML=`
     <div class='gridItem'>
     <img class ='photo' src ='${recipe[2]}'>

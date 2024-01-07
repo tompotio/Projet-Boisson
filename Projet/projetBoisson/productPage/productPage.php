@@ -84,8 +84,8 @@
                 echo(
                     "<a style='text-decoration: none; color:black;' href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/productPage/recipe.php?recipe=" .$row['id'].">".
                     "<div class='gridItem'>".
-                    "<img style='width:100px;height:100px;object-fit:cover;' class ='photo' src ='$path'".
-                    "<p >".$row['Title']."</p> "."</div></a>");
+                    "<img  class ='photo' src ='$path' >".
+                    "<p> ".$row['Title']."</p> "."</div></a>");
             }
             echo("</div");
             $pdo=null;
