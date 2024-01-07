@@ -57,7 +57,6 @@ codePostal.after(erreurCodePostal);
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     success = true;
-    
     if(prenom.value.length!==0 && !/^[a-zA-ZÀ-ú\é\è\ê\-]+$/.test(prenom.value)){
         erreurPrenom.style.visibility="visible";
         success = false;

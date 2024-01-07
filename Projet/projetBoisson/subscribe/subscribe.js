@@ -87,6 +87,7 @@ subscribeForm.addEventListener('submit',e=>{
     if(!/^[0-9]+[,][a-z\sA-Z]+$/.test(adresse.value) && adresse.value.length> 0){
         erreurAdresse.style.display="block";
         success = false;
+        
     }
     
     if(!(/^[0-9]{5}$/.test(cp.value)) && cp.value.length>0){
