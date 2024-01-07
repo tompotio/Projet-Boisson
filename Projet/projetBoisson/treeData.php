@@ -117,7 +117,7 @@ echo('<ul id="main" style="width:100%">');
 
 
 foreach($arbre['Aliment'] as $nomCategorie => $categories){
-    echo '<li class="parent">  <div id="nomCategorie"><a href=http://'.$_SERVER['SERVER_NAME'].'/projetBoisson/productPage/productPage.php?produit='.$nomCategorie.'&chemin='.$nomCategorie.'>'.$nomCategorie.'</a></div>';
+    echo '<li class="parent"><div id="nomCategorie"><a href="http://'.$_SERVER['SERVER_NAME'].'/projetBoisson/productPage/productPage.php?produit='.$nomCategorie.'&chemin='.$nomCategorie.'">'.$nomCategorie. '</a></div>';
     echo '<ul class="child">';
     genererListeHTML($categories,$nomCategorie);
     echo '</ul>';

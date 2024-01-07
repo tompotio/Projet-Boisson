@@ -103,7 +103,7 @@ try{
            $statement->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
            $statement->bindParam(':recette', $recipe, PDO::PARAM_STR);
            $statement->execute();
-           echo("ajout".$keyRecettes."reussi");
+          
             foreach($value['index'] as $keyIngredients => $ingredient){
                 $idRecipe = $keyRecettes+1;
                 $idIngredientRequest = "select productID from PRODUCTS where product_name=?";
