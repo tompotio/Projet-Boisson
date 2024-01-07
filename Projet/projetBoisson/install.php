@@ -4,7 +4,7 @@ include("../Identifiant/identifiantSQL.inc.php");
 $sql = "create DATABASE projetBoisson";
 $successfull;
 try{
-       $connection = new PDO("mysql:host=$servername,$username,$password");
+       $connection = new PDO("mysql:host=$servername;charset=utf8mb4", $username,$password);
        $connection->exec($sql);
        $connection=null;
        $connection = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
@@ -48,10 +48,10 @@ try{
         foreach( $Hierarchie as $key => $product){
             $numItem=$numItem+1;
             if($numItem==$length){
-                $list = $list.'("N'.$key.'")';
+                $list = $list.'("'.$key.'")';
             }
             else{
-                $list = $list.'("N'.$key.'")'.',';
+                $list = $list.'("'.$key.'")'.',';
             }  
         }
         $insertRequest = "insert INTO PRODUCTS(product_name) values" . $list;
@@ -71,7 +71,7 @@ try{
                 $statement->execute();
                 $childID = $statement->fetch(PDO::FETCH_ASSOC);
                 $childID = $childID['productID'];
-                $insertCatRequest = "INSERT INTO SUBCAT(productID,childID) values (N ($productID),N ($childID))";
+                $insertCatRequest = "INSERT INTO SUBCAT(productID,childID) values ( $productID,$childID)";
                 $connection->exec($insertCatRequest);
                 }
             }
@@ -83,7 +83,7 @@ try{
                     $statement->execute();
                     $parentID = $statement->fetch(PDO::FETCH_ASSOC);
                     $parentID = $parentID['productID'];
-                    $insertCatRequest = "INSERT INTO SUPCAT(productID,parentID) values ( N ($productID),N ($parentID))";
+                    $insertCatRequest = "INSERT INTO SUPCAT(productID,parentID) values ( $productID, $parentID)";
                     $connection->exec($insertCatRequest);
                 }
             }
@@ -97,7 +97,7 @@ try{
             $titre = $value['titre'];
             $ingredients = $value['ingredients'];
             $recipe = $value['preparation'];
-           $insertRecipeRequest ='INSERT INTO RECIPES(Title,ingredient,recipe) values ( N (:nomProduits), N (:ingredients), N :recette)';
+           $insertRecipeRequest ='INSERT INTO RECIPES(Title,ingredient,recipe) values ( :nomProduits, :ingredients, :recette)';
            $statement = $connection->prepare($insertRecipeRequest);
            $statement->bindParam(':nomProduits', $titre, PDO::PARAM_STR);
            $statement->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
@@ -115,7 +115,7 @@ try{
                 $statement->execute([$idIngredient["productID"],$idRecipe]);
                 $checkResult = $statement->fetch();
                 if($checkResult['count(productID)']==0){
-                    $insertComposeRequest = 'insert into COMPOSITION(productID,recipeID) values ( N '.$idIngredient["productID"].", N ".$idRecipe.")";
+                    $insertComposeRequest = 'insert into COMPOSITION(productID,recipeID) values ('.$idIngredient["productID"].",".$idRecipe.")";
                     $connection->exec($insertComposeRequest);
                 }
                 
