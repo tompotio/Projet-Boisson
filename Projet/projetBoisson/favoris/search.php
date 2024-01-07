@@ -11,16 +11,20 @@ if(!isset($_SESSION['id'])){
         $_SESSION['panier']=[];
     }
     $arrayIDcopy = new ArrayObject($_SESSION['panier']);
-    $arrayID = $arrayIDcopy->getArrayCopy();
+    $arrayID = $_SESSION['panier'];
+    
 }
 else{
     $request = "select recipesID from CART c where userID = '" . $_SESSION['id']."'";
     $stmt = $connection->query($request);
     $arrayID = $stmt->fetchAll();
+    $arrayID = array_column($arrayID,"recipesID");
 }
 $array = [];
+
 foreach($arrayID as $recipeID){
-        $request  = "select Title,id from RECIPES where id =" . $recipeID['recipesID'];
+        
+        $request  = "select Title,id from RECIPES where id ='" . $recipeID."'";
         $stmt = $connection->query($request);
         $dataRecipe = $stmt->fetch();
         if(str_starts_with(strtolower($dataRecipe['Title']),strtolower($data['search']))){

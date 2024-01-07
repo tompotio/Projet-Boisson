@@ -1,9 +1,9 @@
 const createProduct = (container,recipe)=>{
     const divProduct = document.createElement("div")
     divProduct.classList.add("product");
-    divProduct.innerHTML=`<img class='photo' src=${recipe[2]} onerror='this.src="../../Photos/unknown.jpg"'>
+    divProduct.innerHTML=`<img class='photo' src=${recipe[2]}>
                            
-                           <h1><a style='text-decoration=none;' href="http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}">${recipe[0]}</h1></a>
+                           <h1><a style=text-decoration:none;color:black;font-weight:bold;' href="http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}">${recipe[0]}</h1></a>
                            
                            <div>
                            <button data-id=${recipe[1]} class='addToCart'>retirer des favoris</button>
@@ -43,6 +43,7 @@ searchBar.addEventListener('input',(el)=>{
         method:'POST',
         body:JSON.stringify({search:el.target.value})
     }).then((data)=>data.json()).then(res=>{
+        console.log(res);
         const productList = document.querySelector(".productList")
         productList.innerHTML ='';
         res.forEach((recipe)=>{

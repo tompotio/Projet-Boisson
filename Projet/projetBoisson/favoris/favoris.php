@@ -83,7 +83,7 @@
                             echo("<div class='product'> 
                                     <img class='photo' src=".$path.
                                     ">
-                                    <h2 ><a style='color:black;text-decoration:none; font-weight:bold;' href='http://localhost/projetBoisson/productPage/recipe.php?recipe=".$recipe['id']."'>".$recipe['Title']."</a></h2>
+                                    <h1><a style='color:black;text-decoration:none; font-weight:bold;' href='http://localhost/projetBoisson/productPage/recipe.php?recipe=".$recipe['id']."'>".$recipe['Title']."</a></h1>
                                     <div>
                                         <button data-id=".$recipe['id']." class='addToCart'>retirer des favoris</button>
                                     </div>

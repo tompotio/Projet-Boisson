@@ -18,8 +18,6 @@ search.addEventListener("input",(el)=>{
         res.forEach(element => {
             createElement(element);
         });
-       
-
     })}
 )
 

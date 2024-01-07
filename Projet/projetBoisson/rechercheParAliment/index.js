@@ -13,7 +13,7 @@ const createElement=(el,product,delay)=>{
     const input = el.querySelector("input");
     const div = document.createElement("div");
     div.style.animationDelay = `${delay}ms`;
-    div.innerText=product + " X";
+    div.innerText=product;
     div.classList.add("propose");
     div.addEventListener("click",(e)=>{
        
