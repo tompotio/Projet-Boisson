@@ -49,7 +49,7 @@
                  }
                  echo( "<a style='text-decoration:none;color:black;' href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/productPage/recipe.php?recipe=".$row['id'].">".
                      "<div class='gridItem' style='animation-delay:".$delay."ms'>".
-                     "<img class ='photo' src ='$path'".
+                     "<img class ='photo' src ='$path'>".
                      "<p style='z-index:10000;text-decoration:none;color:black;'>".
                       $row['Title']."</p>"."</div></a>");
                      
