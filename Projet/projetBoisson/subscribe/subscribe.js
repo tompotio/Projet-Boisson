@@ -71,11 +71,11 @@ subscribeForm.addEventListener('submit',e=>{
         erreurLoginCP.style.display='block';
         success = false;
     }
-    if(!/^[a-zA-ZÀ-ú]+$/.test(nom.value) &&nom.value.length!==0){
+    if(!/^[a-zA-ZÀ-ú\é\è\ê\-]+$/.test(nom.value) &&nom.value.length!==0){
         erreurNom.style.display="block";
         success = false;
     }
-    if(!/^[a-zA-ZÀ-ú]+$/.test(prenom.value) &&prenom.value.length!==0){
+    if(!/^[a-zA-ZÀ-ú\é\è\ê\-]+$/.test(prenom.value) &&prenom.value.length!==0){
         erreurprenom.style.display="block";
         success = false;
     }

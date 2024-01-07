@@ -1,11 +1,14 @@
 const search = document.querySelector(".search");
 const grid =document.querySelector(".grid");
 const createElement = (recipe)=>{
-    const divProduct = document.createElement("div");
-    divProduct.classList.add("gridItem");
-    divProduct.innerHTML=`<img style='width:100px;height:100px;object-fit:cover;' class ='photo' src=${recipe[2]}>
-    <p><a href=http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}>${recipe[0]}</a></p></div>`
-    grid.appendChild(divProduct);
+    const grida = document.createElement("a");
+    grida.href=`http://localhost/projetBoisson/productPage/recipe.php?recipe=${recipe[1]}`
+    grida.innerHTML=`
+    <div class='gridItem'>
+    <img class ='photo' src ='${recipe[2]}'>
+    <p style='z-index:10000;text-decoration:none;color:black;'>
+     ${recipe[0]}</p>`
+    grid.appendChild(grida);
 }
 search.addEventListener("input",(el)=>{
     searchParam = new URL(document.location).searchParams;

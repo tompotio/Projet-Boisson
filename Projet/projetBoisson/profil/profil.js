@@ -16,49 +16,56 @@ const erreurPrenom = document.createElement("p");
 erreurPrenom.style.color='red'
 erreurPrenom.innerText="Le prénom peut contenir uniquement des lettres"
 erreurPrenom.style.visibility="hidden";
+erreurPrenom.style.width='max-content'
 prenom.after(erreurPrenom)
 const erreurNom = document.createElement("p");
 erreurNom.style.color='red'
 erreurNom.innerText="Le nom peut contenir uniquement des lettres"
 erreurNom.style.visibility="hidden";
+erreurNom.style.width='max-content'
 nom.after(erreurNom)
 const erreurTelephone = document.createElement("p");
 erreurTelephone.style.color='red';
 erreurTelephone.innerText="Le format n'est pas bon le numero ne peut contenir que des chiffres et doit commmencer par zero"
 erreurTelephone.style.visibility="hidden";
+erreurTelephone.style.width='max-content';
 téléphone.after(erreurTelephone);
 const erreurMail= document.createElement("p");
 erreurMail.style.color='red';
 erreurMail.innerText="votre mail n'est pas au bon format"
 erreurMail.style.visibility="hidden";
+erreurMail.style.width='max-content'
 mail.after(erreurMail);
 const erreurAdresse = document.createElement("p");
 erreurAdresse.style.color='red';
 erreurAdresse.innerText="Le format n'est pas bon votre adresse doit commencer par au moins suivi d'une virgule"
 erreurAdresse.style.visibility="hidden";
+erreurAdresse.style.width='max-content'
 adresse.after(erreurAdresse);
 const erreurVille = document.createElement("p");
 erreurVille.style.color='red';
 erreurVille.innerText="Le nom de votre ville n'est pas correcte"
 erreurVille.style.visibility="hidden";
+erreurVille.style.width='max-content';
 ville.after(erreurVille);
 const erreurCodePostal = document.createElement("p");
 erreurCodePostal.style.color='red';
 erreurCodePostal.innerText="Le code postal est invalide"
 erreurCodePostal.style.visibility="hidden";
+erreurCodePostal.style.width='max-content'
 codePostal.after(erreurCodePostal);
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     success = true;
     
-    if(prenom.value.length!==0 && !/^[a-zA-ZÀ-ú]+$/.test(prenom.value)){
+    if(prenom.value.length!==0 && !/^[a-zA-ZÀ-ú\é\è\ê\-]+$/.test(prenom.value)){
         erreurPrenom.style.visibility="visible";
         success = false;
     }
     else{
         erreurPrenom.style.visibility="hidden";
     }
-    if(nom.value.length!==0 && !/^[a-zA-ZÀ-ú]+$/.test(nom.value)){
+    if(nom.value.length!==0 && !/^[a-zA-ZÀ-ú\é\è\ê\-]+$/.test(nom.value)){
         erreurNom.style.visibility="visible";
         success = false;
     }

@@ -23,7 +23,7 @@ const addButtonlistener = ()=>{
             }).then((res)=>res.json()).then(data=>{
                 const toast = document.createElement("div");
                 toast.classList.add("ToastShow");
-                toast.innerText="ce produit à été retiré des favoris"
+                toast.innerHTML="<p style='text-align:center;font-weight:bold;'>Suppression</p><p>❌ Ce produit a été retiré de vos favoris</p>"
                 document.body.appendChild(toast); 
                 setTimeout(()=>{
                     toast.remove();

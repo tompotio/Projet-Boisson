@@ -18,7 +18,7 @@ button.addEventListener("click",()=>{
             const toast = document.createElement("div");
             toast.classList.add("ToastShow");
             if(data.status==='add'){
-                toast.innerText="ce produit à été ajouté à vos favoris"
+                toast.innerHTML="<p style='text-align:center;font-weight:bold;'>Ajout</p><p>✅ Ce produit a été ajouté à vos favoris</p>"
                 document.body.appendChild(toast); 
                 button.innerText="retirer des favoris"
                 setTimeout(()=>{
@@ -26,7 +26,7 @@ button.addEventListener("click",()=>{
                     canClick=true;
                 },2300);
             }else{
-                toast.innerText="ce produit à été retiré des favoris"
+                toast.innerHTML="<p style='text-align:center;font-weight:bold;'>Suppression</p><p>❌ Ce produit a été retiré de vos favoris</p>"
                 document.body.appendChild(toast); 
                 button.innerText="ajouter aux favoris"
                 setTimeout(()=>{

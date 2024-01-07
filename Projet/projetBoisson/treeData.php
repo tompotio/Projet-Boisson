@@ -107,7 +107,7 @@ if(isset($_SESSION['id'])){
 else{
     echo("<li><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/connection/connexion.php'> connectez vous</a></li>");
 }
-echo("<img src='http://".$_SERVER['SERVER_NAME']."/Photos/loupe.png' class='loupe' alt='' style=' width:1%; height:30%;'> <li class='search' id='search' style='  display: flex; justify-content: center; margin:0 auto;'><input style='width:100%;margin:0 auto' type='text'></li>");
+echo("<img src='http://".$_SERVER['SERVER_NAME']."/Photos/loupe.png' class='loupe' alt='' style='  height:30%;'> <li  class='search' id='search' style='  display: flex; justify-content: center; margin:0 auto;'><input placeholder='Recherche' style='width:100%;margin:0 auto' type='text'></li>");
 echo("<li><a href=http://".$_SERVER['SERVER_NAME']."/projetBoisson/rechercheParAliment/rechercheParAliment.php style='color:black'>recherche par groupe d'aliment</a></li>");
 echo("<li ><a style='color:black;' href='http://".$_SERVER['SERVER_NAME']."/projetBoisson/favoris/favoris.php'>vos favoris</a></li>");
 

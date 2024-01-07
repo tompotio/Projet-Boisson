@@ -7,7 +7,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: gainsboro;
-    
+    overflow-x: hidden;
 }
 
 .photo{
@@ -16,13 +16,14 @@ body{
     margin-top: 10px;
     border: 2px solid black;
     transition: transform .1s linear, filter 0.3s ease-in-out;
+    margin-bottom: 10px;
     
     
 }
 .photo:hover{
     transform: scale(1.05);
     box-shadow: 5px 5px 15px -10px #000000 inset;
-    filter: drop-shadow(0px 4px 10px black);
+    filter: drop-shadow(0px 4px 10px red);
 }
 
 .container{
@@ -30,7 +31,6 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     width: 80%;
 }
 .productLegend{
@@ -72,9 +72,12 @@ hr {
         bottom: 10%;
         right: 0;
         animation: toast 3s linear;
-        
-        background-color: black;
-        color: white;
+        background-color: #885df1;
+        border: 2px solid black;
+        box-shadow: 5px 8px 0px 0px #000000;
+        padding:0 5px 0 5px;
+        color:white;
+        margin-right: 5px;
 }
 @keyframes toast {
     0%{transform: translateX(100%);}

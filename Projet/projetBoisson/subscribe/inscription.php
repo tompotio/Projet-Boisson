@@ -33,10 +33,10 @@
                 <div class='input '>
                     <label for="prénom">prénom</label>
                     <input id="prénom"type="text" placeholder = prénom>
-                    <p id="erreurprenom"style="color:red;display:none">votre nom ne doit pas contenir autre chose que des lettres</p>
+                    <p id="erreurprenom"style="color:red;display:none">votre prenom ne doit pas contenir autre chose que des lettres</p>
                 </div>
                 <div class='input sexe'>
-                    <label for="prénom">Sexe</label>
+                    <label>Sexe</label>
                     <div class='inputSexeContainer'>
                         <div>
                             <label for="sexe">M</label>

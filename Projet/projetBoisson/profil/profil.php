@@ -37,31 +37,31 @@
            <div class='formProfil'>
             <div class='inputProfil'>
             <label for="prenom">Prenom</label>
-            <input type="text" name="prenom" value=<?php echo($data['prenom'])?>>
+            <input type="text" name="prenom" placeholder=' ' value=<?php echo($data['prenom'])?>>
             </div>
             <div class='inputProfil'>
             <label for="nom">Nom</label>
-            <input type="text" name="nom" value=<?php echo($data['nom'])?>>
+            <input type="text" name="nom" placeholder=' ' value=<?php echo($data['nom'])?>>
             </div>
             <div class='inputProfil'>
             <label for="telephone">Tel</label>
-            <input type="tel" name="telephone" value=<?php echo($data['telephone'])?>>
+            <input type="tel" name="telephone" placeholder=' ' value=<?php echo($data['telephone'])?>>
             </div>
             <div class='inputProfil'>
             <label for="mail">Mail</label>
-            <input type="mail" name=mail value=<?php echo($data['mail'])?>>
+            <input type="mail" name="mail" placeholder=' ' value=<?php echo($data['mail'])?>>
             </div>
             <div class='inputProfil'>
             <label for="adresse">Adresse</label>
-            <input type="text" name="adresse" value=<?php echo($data['Street'])?>>
+            <input type="text" name="adresse" placeholder=' ' value=<?php echo($data['Street'])?>>
             </div>
             <div class='inputProfil'>
             <label for="codePostal">CodePostal</label>
-            <input type="text" name="codePostal" value=<?php echo($data['zipCode'])?>>
+            <input type="text" name="codePostal" placeholder=' ' value=<?php echo($data['zipCode'])?>>
             </div>
             <div class='inputProfil'>
             <label for="ville">Ville</label>
-            <input type="text" name="ville" value=<?php echo($data['city'])?>>
+            <input type="text" name="ville" placeholder=' ' value=<?php echo($data['city'])?>>
             </div>
             <input type="submit" value="enregistrer les modification">
             </div>
