@@ -22,7 +22,7 @@ foreach(array_unique($arr) as $nomProduit){
 $query = 'select distinct Title,id from RECIPES r join COMPOSITION c on r.id=c.recipeID join PRODUCTS p on p.productID=c.productID where '.$requete;
 $pdo = new PDO("mysql:host=$servername;dbname=$dataBase;charset=utf8mb4", $username,$password);
 foreach($pdo->query($query) as $row){
-    if(str_starts_with(strtolower($row['Title']),$data['search'])){
+    if(str_starts_with(strtolower($row['Title']),strtolower($data['search']))){
         $nameFileArray= preg_split("/ /",$row['Title']);
         $i = 0;
         $nameFile ="";
